@@ -1,0 +1,109 @@
+body{
+    margin: 0;
+}
+.home-container{
+    width: 100vw;
+    display: flex;
+    .left{
+        width: 6vw;
+        height: 100vh;
+        background-color: rgba(0, 119, 255, 0.945);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        .left-header, .left-footer{
+            display: flex;
+            flex-direction: column;
+        }
+        .avatar{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-top: 30px;
+            margin-bottom: 5px;
+            &:hover{
+                    cursor: pointer;
+                }
+            img{
+                width: 100%;
+            }
+        }
+        .icon{
+            padding: 13px;
+            border-radius: 5px;
+            position: relative;
+            .bi{
+                font-size: 28px;
+                color: white;     
+            }
+            &:hover{
+                    cursor: pointer;
+                    background-color: #1414142a;
+                }
+            &:hover .modal-setting{
+                display: block;
+            }
+            margin-top: 3px;
+            .modal-setting{
+                width: 230px;
+                position: absolute;
+                bottom: 100%;
+                left: -20px;
+                background-color: rgb(252, 252, 252);
+                padding: 10px 0;
+                color: black;
+                border-radius: 5px;
+                display: none;
+                .modal-item{
+                    padding: 5px 10px;
+                    display: flex;
+                    align-items: center;
+                    color: rgb(27, 27, 27);
+                    justify-content: space-between;
+                    position: relative;
+                    .modal-icon{
+                        width: 50px;
+                        overflow: hidden;
+                        text-align: center;
+                       
+                        .bi{
+                            font-size: 20px;
+                             color: black;
+                        }
+                       
+                    }
+                    .modal-title{
+                        flex: 1;
+                        color: rgba(26, 26, 26, 0.808);
+                    }
+                     .modal-expends{
+                            color: black;
+                            .bi{
+                                color: rgba(0, 0, 0, 0.774);
+                                font-size: 12px;
+                            }
+                        }
+                    &:hover{
+                        cursor: pointer;
+                        background-color: #14141410;
+                    }
+                    .modal-data{
+                        // width: 200px;
+                        // top: 0;
+                        // right: 0;
+                        // z-index: 1000;
+                    }
+                }
+            }
+        }
+        .icon.active{
+            background-color: #1414145d;
+        }
+    }
+}
+hr{
+    color: black;
+}
+
