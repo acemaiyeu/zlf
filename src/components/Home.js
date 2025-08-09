@@ -1,9 +1,9 @@
 import React from 'react'
 import "../scss/Home.scss"
+import logo_vn from '../asset/img/logo_vn.png'
+import logo_en from '../asset/img/istockphoto-1042208442-612x612.jpg'
 
 class Home extends React.Component{
-
-
     render() {
         return (
             <div className="home-container">
@@ -54,19 +54,44 @@ class Home extends React.Component{
                                         <div className="modal-icon">
                                            <i class="bi bi-database"></i>
                                         </div>
-                                         <div className="modal-title">Dữ liệu</div>
+                                         <div className="modal-title" title="Dữ liệu">Dữ liệu</div>
                                           <div className="modal-expends">
                                             <i class="bi bi-chevron-right"></i>
                                           </div>
-                                               {/* <div className="modal-data">
+                                               <div className="modal-data">
                                                     <div className="modal-item">
-                                                            <div className="modal-icon">
-                                                                <i class="bi bi-person"></i>
-                                                            </div>
-                                                            <div className="modal-title">Thông tin tài khoản</div>
+                                                            <div className="modal-title">Đồng bộ tin nhắn</div>
                                                             <div className="modal-expends"></div>
                                                     </div>
-                                             </div> */}
+                                                    <div className="modal-item">
+                                                            <div className="modal-title">Quản lý dữ liệu</div>
+                                                            <div className="modal-expends"></div>
+                                                    </div>
+                                                    <hr style={{ width: "90%"}}/>
+                                                     <div className="modal-item">
+                                                            <div className="modal-title">Khác
+                                                                <div className="modal-orther">
+                                                                    <div className="modal-item">
+                                                                            <div className="modal-title">Xuất dữ liệu</div>
+                                                                            <div className="modal-expends"></div>
+                                                                    </div>
+                                                                    <div className="modal-item">
+                                                                            <div className="modal-title">Nhập dữ liệu</div>
+                                                                            <div className="modal-expends"></div>
+                                                                    </div>
+                                                                    <hr style={{ width: "90%"}}/>
+                                                                    <div className="modal-item">
+                                                                            <div className="modal-title">Quản lý File</div>
+                                                                            <div className="modal-expends">
+                                                                            </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-expends">
+                                                                <i class="bi bi-chevron-right"></i>
+                                                            </div>
+                                                    </div>
+                                             </div>
                                 </div>
                                 <div className="modal-item">
                                         <div className="modal-icon">
@@ -76,6 +101,22 @@ class Home extends React.Component{
                                           <div className="modal-expends">
                                             <i class="bi bi-chevron-right"></i>
                                           </div>
+                                          <div className="modal-data">
+                                                    <div className="modal-item">
+                                                            <div className="modal-icon">
+                                                                <img src={logo_vn}  alt="logo_vn"/>
+                                                            </div>
+                                                            <div className="modal-title">Tiếng Việt</div>
+                                                            <div className="modal-expends"></div>
+                                                    </div>
+                                                    <div className="modal-item">
+                                                        <div className="modal-icon">
+                                                                <img src={logo_en}  alt="logo_vn"/>
+                                                            </div>
+                                                            <div className="modal-title">Tiếng Anh</div>
+                                                            <div className="modal-expends"></div>
+                                                    </div>
+                                             </div>
                                 </div>
                                 <div className="modal-item">
                                         <div className="modal-icon">
@@ -85,6 +126,25 @@ class Home extends React.Component{
                                           <div className="modal-expends">
                                             <i class="bi bi-chevron-right"></i>
                                           </div>
+                                          <div className="modal-data">
+                                                    <div className="modal-item">
+                                                            <div className="modal-title">Thông tin phiên bản</div>
+                                                            <div className="modal-expends"></div>
+                                                    </div>
+                                                    <div className="modal-item">      
+                                                            <div className="modal-title">Liên hệ</div>
+                                                            <div className="modal-expends"></div>
+                                                    </div>
+                                                    <div className="modal-item">      
+                                                            <div className="modal-title">Gửi file log tới ZLF</div>
+                                                            <div className="modal-expends"></div>
+                                                    </div>
+                                                    <hr style={{ width: "90%"}}/>
+                                                     <div className="modal-item">      
+                                                            <div className="modal-title">Phím tắt</div>
+                                                            <div className="modal-expends"></div>
+                                                    </div>
+                                             </div>
                                 </div>
                              
                                     <hr style={{ width: "90%"}}/>
@@ -92,14 +152,14 @@ class Home extends React.Component{
                                         <div className="modal-icon">
                                            
                                         </div>
-                                         <div className="modal-title" style={{color: "red"}}>Đăng xuất</div>
+                                        <div className="modal-title" style={{color: "red"}}>Đăng xuất</div>
                                          
                                 </div>
                                  <div className="modal-item">
                                         <div className="modal-icon">
                                           
                                         </div>
-                                         <div className="modal-title">Thoát</div>
+                                        <div className="modal-title">Thoát</div>
                                          
                                 </div>
                             </div>
@@ -107,7 +167,27 @@ class Home extends React.Component{
                     </div>
                 </div>
 
-                <div className="right">Right</div>
+                <div className="right">
+                    <div className="right-header">
+                                <p>Zalo - Thành Huy</p>
+                    </div>
+                    <div className="right-content">
+                            <div className="list-content">
+                                <div className="found-container">
+                                    <div className="form-control">
+                                        <i class="bi bi-search"></i>
+                                        <input type='text' placeholder='Tìm kiếm'/>
+                                    </div>
+                                    <i class="bi bi-person-plus"></i>
+                                    <i class="bi bi-person-plus-fill"></i>
+                                </div>
+                                <div className="list-users">
+                                    
+                                </div>
+                            </div>
+                            <div className="content">Content</div>
+                    </div>
+                </div>
             </div>
         )
     }

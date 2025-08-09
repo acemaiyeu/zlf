@@ -56,6 +56,15 @@ body{
                 color: black;
                 border-radius: 5px;
                 display: none;
+                box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.123);
+                &::after{
+                    content: "";
+                    width: 200px;
+                    height: 50px;
+                    background-color: transparent;
+                    z-index: 1000;
+                    position: absolute;
+                }
                 .modal-item{
                     padding: 5px 10px;
                     display: flex;
@@ -67,10 +76,13 @@ body{
                         width: 50px;
                         overflow: hidden;
                         text-align: center;
-                       
                         .bi{
                             font-size: 20px;
                              color: black;
+                        }
+                        img{
+                            width: 30px;
+                            
                         }
                        
                     }
@@ -89,17 +101,110 @@ body{
                         cursor: pointer;
                         background-color: #14141410;
                     }
+                     &:hover .modal-data{
+                         display: block;
+                     }
                     .modal-data{
-                        // width: 200px;
-                        // top: 0;
-                        // right: 0;
-                        // z-index: 1000;
+                        min-width: 150px;
+                        top: 0;
+                        left: 100%;
+                        z-index: 1000;
+                        position: absolute;
+                        background-color: white;
+                        display: none;
+                        padding: 5px 0;
+                        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.123);
+                        .modal-item{
+                            display: flex;
+                            position: relative;
+                             &:hover{
+                                cursor: pointer;
+                                background-color: #1414142a;
+                            }
+                           
+                            .modal-orther{
+                                min-width: 150px;
+                                position: absolute;
+                                left: 100%;
+                                top: 0;
+                                background-color: white;
+                                display: none;
+                                padding: 5px 0;
+                                box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.123);
+                            }
+                            &:hover .modal-orther{
+                                display: block;
+                                background-color: white;
+                            }
+                        }
                     }
                 }
             }
         }
         .icon.active{
             background-color: #1414145d;
+        }
+
+    }
+    .right{
+        background-color: #f0efef;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        .right-header{
+            background-color: #e0e0e0;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .right-content{
+            flex: 1;
+            background-color: white;
+            display: flex;
+            .list-content{
+                width: 350px;
+                height: calc(95vh + 123x);
+                border-right: 1px solid black;
+                .found-container{
+                    display: flex;
+                    font-size: 20px;
+                    align-items: center;
+                    justify-content: space-around;
+                    padding: 20px;
+                    .form-control{
+                        padding: 10px;
+                        flex: 1;
+                        display: flex;
+                        background-color: #c2c2c24d;
+                        margin-right: 10px;
+                        border-radius: 5px;
+                        &>.bi{
+                            font-size: 15px;
+                        }
+                        input{
+                            width: 100%;
+                            border: none;
+                            outline: #c2c2c200;
+                            background-color: #c2c2c200;
+                            padding: 0 10px;
+                            box-sizing: border-box;
+                        }
+                        
+                    }
+                    .bi + .bi {
+                            margin-left: 10px;
+                            
+                    }
+                    .bi{
+                        cursor: pointer;
+                        font-size: 25px;
+                    }
+                }
+            }
+            .content{
+                flex: 1;
+            }
         }
     }
 }
