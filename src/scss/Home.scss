@@ -165,7 +165,7 @@ body{
             .list-content{
                 width: 350px;
                 height: calc(95vh + 123x);
-                border-right: 1px solid black;
+                border-right: 0.1px solid rgb(221, 220, 220);
                 .found-container{
                     display: flex;
                     font-size: 20px;
@@ -201,9 +201,385 @@ body{
                         font-size: 25px;
                     }
                 }
+                .list-users
+                {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    .user-item{
+                        height: 45px;
+                        display: flex;
+                        align-items: center;
+                        padding: 10px 20px;
+                        // box-sizing: border-box;
+                        cursor: pointer;
+                        &:hover{
+                            cursor: pointer;
+                            background-color: #14141410;
+                        }
+                        .user-avatar{
+                            width: 50px;
+                            overflow: hidden;
+                            margin-right: 20px;
+                            background-color: #fff;
+                            border-radius: 50%;
+                            display: flex;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        .user-content{
+                            flex: 1;
+                            &>p:nth-child(1){
+                                font-size: 18px;
+                            }
+                            &>p{
+                                line-height: 10px;
+                                font-size: 15px;
+                            }
+                        }
+                        .user-more{
+                            display: flex;
+                            align-items: flex-start;
+                            flex-direction: column;
+                           &>p{
+                            margin-top: 0;
+                            font-size: 12px;
+                           }
+                           &>.more-action{
+                                width: 15px;
+                                img{
+                                    width: 100%;
+                                }
+                           }
+                        }
+                    }
+                    .user-item.active{
+                        background-color: #a6d6f16e;
+                    }
+                }
             }
             .content{
                 flex: 1;
+                display: flex;
+                flex-direction: column;
+                .content-header{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0 2%;
+                    box-sizing: border-box;
+                    border-bottom: 0.1px solid rgb(221, 220, 220);
+                    .content-left, .content-right{
+                        flex: 1;
+                        display: flex;
+                        align-items: center;
+                    }
+                    .content-left{
+                        .content-avatar{
+                            width: 50px;
+                            overflow: hidden;
+                            margin-right: 10px;
+                            border-radius: 50%;
+                            align-items: center;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        .content-body{
+                            padding: 10px 0;
+                            .content-username{
+                                font-size: 20px;
+                            }
+                            .content-status{
+                                color: rgb(131, 130, 130);
+                            }
+                        }
+                    }
+                    .content-right{
+                        justify-content: flex-end;
+                        .icon{
+                            font-size: 24px;
+                            margin-left: 10px;
+                            display: flex;
+                            align-items: center;
+                            padding: 10px;
+                            box-sizing: border-box;
+                            &:hover{
+                                cursor: pointer;
+                                background-color: #14141410;
+                                border-radius: 3px;
+                            }
+                        }
+                    }
+                    
+                }
+                .box-message{
+                    background-color: rgba(209, 208, 208, 0.445);
+                    flex: 1;
+                }
+                
+            }
+            .box-expends{
+                width: 350px;
+                height: calc(95vh + 16px);
+                border-left: 0.1px solid rgb(221, 220, 220);
+                display: flex;
+                flex-direction: column;
+                .box-expends-header{
+                    width: 100%;
+                    height: 62px;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0 2%;
+                    box-sizing: border-box;
+                    border-bottom: 0.1px solid rgb(221, 220, 220);
+                    &>p{
+                        font-size: 20px;
+                        text-align: center;
+                        margin: auto;
+                        font-weight: 550;
+                        color: rgb(68, 67, 67);
+                    }
+                }
+                
+                .box-expends-body{
+                    background-color: rgba(209, 208, 208, 0.445);
+                    flex: 1;
+                    .reminder, .info-user, .security, .distroy{
+                        width: 100%;
+                        background-color: #fff;
+                    }
+                    .security, .distroy{
+                        margin-top: 20px;
+                    }
+                    .info-user{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        .user-avatar{
+                            width: 50px;
+                            overflow: hidden;
+                            display: flex;
+                            align-items: center;
+                            border-radius: 50%;
+                            margin-top: 30px;
+                            margin-bottom: 10px;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        .user-name{
+                            display: flex;
+                            margin: auto;
+                            .user-username{
+                                    font-size: 20px;
+                                    line-height: 10px;
+                                    margin-top: 9px;
+                                    margin-left: 20px;
+                                }
+                            .edit-username{
+                                width: 30px;
+                                height: 30px;
+                                margin-left: 10px;
+                                background-color: #dad7d7bb;
+                                padding: 10px;
+                                box-sizing: border-box;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 50%;
+                                
+                                &>.bi{
+                                    font-size: 12px;
+                                    text-align: center;
+                                    &:hover{
+                                        cursor: pointer;
+                                        border-bottom: 1px solid blue;
+                                    }
+                                }
+                            }
+                        }
+                        .user-function{
+                            display: flex;
+                            .function-item{
+                                flex: 1;
+                                height: 80px;
+                                display: flex;
+                                flex-direction: column;
+                                text-align: center;
+                                align-items: center;
+                                .function-item-icon{
+                                    width: 30px;
+                                    height: 30px;
+                                    background-color: rgb(228, 228, 228);
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    border-radius: 50%;
+                                    &:hover{
+                                        background-color: rgb(214, 214, 214);
+                                        cursor: pointer;
+                                    }
+                                }
+                                .function-item-title{
+                                    margin-top: 5px;
+                                    color: rgb(73, 73, 73);
+                                    font-weight: 10;
+                                }
+                            }
+                        }
+                    }
+                    .reminder{
+                        margin-top: 20px;
+                        display: flex;
+                        align-items: center;
+                        .reminder-title{
+                            font-size: 17px;
+                            color: rgb(59, 59, 59);
+                        }
+                        .reminder-icon{
+                            width: 30px;
+                            height: 30px;
+                            overflow: hidden;
+                            padding: 10px;
+                            img{
+                                width: 100%;
+                            }
+                        }
+                        &:hover{
+                            cursor: pointer;
+                            background-color: #14141410;
+                        }
+                    }
+                    .security{
+                        .security-title{
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            padding: 0 10px;
+                            &>p{
+                                font-weight: 600;
+                                font-size: 18px;
+                            }
+                            &>.bi{
+                                cursor: pointer;
+                            }
+                        }
+                        .list-security{
+                            // display: flex;
+                            // flex-direction: column;
+                            padding: 0 0 10px 0;
+                            .bi {
+                                font-size: 23px;
+                            }
+                            .security-item{
+                                height: 50px;
+                                display: flex;
+                                align-items: center;
+                                padding: 0 10px;
+                                .security-item-title{
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    line-height: 1px;
+                                    justify-content: space-between;
+                                    &>p{
+                                        padding: 0 10px;
+                                    }
+                                }
+                                &:hover{
+                                    cursor: pointer;
+                                    background-color: #14141410;
+                                }
+                            }
+                            .security-item1{
+                                    height: 50px;
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;   
+                                    justify-content: flex-start;
+                                    padding: 0 10px;
+                                    .security-item-icon{
+                                        display: flex;
+                                        align-items: center;
+                                        height: 30px;
+                                        // justify-content: flex-start;
+                                        
+                                    }  
+                                    .security-item-title1{
+                                            display: flex;
+                                            flex-direction: column;
+                                            .group{
+                                                display: flex;
+                                                align-items: center;
+                                                height: 30px;
+                                                &>p{
+                                                    padding: 0 10px;
+                                                    margin: 0;
+                                                }
+                                                .security-help{
+                                                    position: relative;
+                                                    &>.bi{
+                                                        font-size: 14px;
+                                                    }
+                                                    .modal-security-help{
+                                                        width: 200px;
+                                                        background-color: #100dbb;
+                                                        color: white;
+                                                        padding: 20px;
+                                                        position: absolute;
+                                                        top: -75px;
+                                                        left: calc(-200px / 2);
+                                                        display: none;
+                                                        &>p{
+                                                            margin: 0;
+                                                        }
+                                                    }
+                                                }
+                                                .security-help:hover .modal-security-help{
+                                                    display: block;
+                                                }
+                                            }
+                                            align-items: center;
+                                            &>p{
+                                                padding: 0 10px;
+                                                margin-top: 0;
+                                                margin-bottom: 3px;
+                                                margin-left: -20px;
+                                            }
+                                        }
+                                        &:hover{
+                                            cursor: pointer;
+                                            background-color: #14141410;
+                                        }
+                            }
+                        }
+                    }
+                    .distroy{
+                        display: flex;
+                        flex-direction: column;
+                        padding: 5px 0;
+                        .bi{
+                            font-size: 23px;
+                        }
+                        .distroy-item{
+                            display: flex;
+                            height: 50px;
+                            align-items: center;
+                            padding: 0 10px;
+                            box-sizing: border-box;
+                            .distroy-item-title{
+                                padding: 0 10px;
+                            }
+                             &:hover{
+                                cursor: pointer;
+                                background-color: #14141410;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
