@@ -1,5 +1,7 @@
 body{
     margin: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 .home-container{
     width: 100vw;
@@ -316,16 +318,24 @@ body{
                 }
                 .box-message{
                     background-color: rgba(209, 208, 208, 0.445);
-                    flex: 1;
+                    height: 760px;
+                    // background-color: red;
+                    overflow: scroll;
+                    padding: 0 10px;
+                }
+                .box-message::-webkit-scrollbar {
+                    display: none; /* Chrome, Safari */
                 }
                 
             }
+            
             .box-expends{
                 width: 350px;
                 height: calc(95vh + 16px);
                 border-left: 0.1px solid rgb(221, 220, 220);
                 display: flex;
                 flex-direction: column;
+                overflow-y: scroll;
                 .box-expends-header{
                     width: 100%;
                     height: 62px;
@@ -346,11 +356,11 @@ body{
                 .box-expends-body{
                     background-color: rgba(209, 208, 208, 0.445);
                     flex: 1;
-                    .reminder, .info-user, .security, .distroy{
+                    .reminder, .info-user, .security, .distroy, .media, .file{
                         width: 100%;
                         background-color: #fff;
                     }
-                    .security, .distroy{
+                    .security, .distroy, .media, .file{
                         margin-top: 20px;
                     }
                     .info-user{
@@ -451,6 +461,66 @@ body{
                             cursor: pointer;
                             background-color: #14141410;
                         }
+                    }
+                    .media{
+                        .media-title{
+                            display: flex;
+                            align-items: center;
+                            padding: 0 10px;
+                            justify-content: space-between;
+                        }
+                        .media-list{
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            gap: 10px;
+                            .media-item{
+                                width: 100px;
+                                height: 100px;
+                                display: flex;
+                                cursor: pointer;
+                                overflow: hidden; 
+
+                            }
+                        }
+                    }
+                    .file{
+                        width: 100%;
+                        .file-title{
+                            display: flex;
+                            padding: 0 10px;
+                            align-items: center;
+                            justify-content: space-between;
+                            
+                        }
+                        .file-list{
+                            overflow: hidden;
+                                .file-item{
+                                    display: flex;
+                                    padding: 10px;
+                                    align-items: center;
+                                    
+                                    .file-icon{
+                                        display: flex;
+                                        width: 30px;
+                                        justify-content: center;
+                                        font-size: 30px;
+                                    }
+                                    .file-content{
+                                        padding: 0 10px;
+                                        flex: 1;
+                                    }
+                                    .file-time{
+                                        display: flex;
+                                        align-self: flex-end;
+                                        color: gray;
+                                    }
+                                    &:hover{
+                                        cursor: pointer;
+                                        background-color: #14141410;
+                                    }
+                                }
+                            }
                     }
                     .security{
                         .security-title{
@@ -581,6 +651,10 @@ body{
                     }
                 }
             }
+            .box-expends::-webkit-scrollbar {
+                    display: none; /* Chrome, Safari */
+                }
+            
         }
     }
 }

@@ -1,0 +1,34 @@
+.message-container{
+    width: 100%;
+    height: 100%;
+    .list-message{
+        display: flex;
+        flex-direction: column;
+        .form-message{
+            min-height: 50px;
+            display: flex;
+            flex-direction: column;
+            max-width: 50%;
+            background-color: #dde8f5;
+            box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.384);
+            padding: 5px 10px ;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .icon-message{
+            width: 100px;
+        }
+        .mess-right{
+            align-self: flex-end;
+        }
+        .mess-left{
+            align-items: flex-start;
+        }
+    }
+    
+ 
+    .form-message{
+        align-items: flex-end;
+    }
+    
+}

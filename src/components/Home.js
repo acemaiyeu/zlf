@@ -2,9 +2,39 @@ import React from 'react'
 import "../scss/Home.scss"
 import logo_vn from '../asset/img/logo_vn.png'
 import logo_en from '../asset/img/istockphoto-1042208442-612x612.jpg'
-
+import video from '../asset/video/MV EM CHẲNG ĐÀNH - Miu Lê  OST HẸN YÊU - KIM ENTERTAINMENT (720p, h264).mp4'
+import Message from './Message'
+import {connect} from 'react-redux'
 class Home extends React.Component{
+    state = {
+        user_index: 0,
+        message: "Hello em",
+        listMessages: [],
+        n_rand: 0
+    }
+
+    sendMessage = () => {
+        this.props.sendMessage({
+            user_index: this.state.user_index,
+            message: this.state.message
+        })
+    }
+      componentDidMount(){
+        this.setState({
+            listMessages: this.props.listUsers[0].listMessage
+        })
+    }
+       componentDidUpdate(prevProps) {
+        
+        if (prevProps.n_rand !== this.props.n_rand) {
+                this.setState({
+                    messages: this.props.messages
+                });
+            }
+        }
+
     render() {
+        console.log("Home Rerender")
         return (
             <div className="home-container">
                 <div className="left">
@@ -16,35 +46,35 @@ class Home extends React.Component{
                             <i className="bi bi-chat-text-fill"></i>
                         </div>
                         <div className="icon">
-                            <i class="bi bi-person-vcard-fill"></i>
+                            <i className="bi bi-person-vcard-fill"></i>
                         </div>
                     </div>
                     <div className="left-footer">
                         <div className="icon" title="ZLF Cloud">
-                            <i class="bi bi-cloud-check"></i>
+                            <i className="bi bi-cloud-check"></i>
                         </div>
                          <div className="icon" title="Cloud của tôi">
-                            <i class="bi bi-cloud"></i>
+                            <i className="bi bi-cloud"></i>
                         </div>
                          <div className="icon" title="Chụp hình KHÔNG kèm cửa sổ ZLF">
-                            <i class="bi bi-fullscreen"></i>
+                            <i className="bi bi-fullscreen"></i>
                         </div>
                         <div className="icon" title="Công cụ">
-                           <i class="bi bi-briefcase-fill"></i>
+                           <i className="bi bi-briefcase-fill"></i>
                         </div>
                         <div className="icon" title="Cài đặt">
-                            <i class="bi bi-gear"></i>
+                            <i className="bi bi-gear"></i>
                             <div className="modal-setting">
                                 <div className="modal-item">
                                         <div className="modal-icon">
-                                            <i class="bi bi-person"></i>
+                                            <i className="bi bi-person"></i>
                                         </div>
                                          <div className="modal-title">Thông tin tài khoản</div>
                                           <div className="modal-expends"></div>
                                 </div>
                                 <div className="modal-item">
                                         <div className="modal-icon">
-                                            <i class="bi bi-gear"></i>
+                                            <i className="bi bi-gear"></i>
                                         </div>
                                          <div className="modal-title">Cài đặt</div>
                                           <div className="modal-expends"></div>
@@ -52,11 +82,11 @@ class Home extends React.Component{
                                     <hr style={{ width: "90%"}}/>
                                 <div className="modal-item">
                                         <div className="modal-icon">
-                                           <i class="bi bi-database"></i>
+                                           <i className="bi bi-database"></i>
                                         </div>
                                          <div className="modal-title" title="Dữ liệu">Dữ liệu</div>
                                           <div className="modal-expends">
-                                            <i class="bi bi-chevron-right"></i>
+                                            <i className="bi bi-chevron-right"></i>
                                           </div>
                                                <div className="modal-data">
                                                     <div className="modal-item">
@@ -88,18 +118,18 @@ class Home extends React.Component{
                                                                 </div>
                                                             </div>
                                                             <div className="modal-expends">
-                                                                <i class="bi bi-chevron-right"></i>
+                                                                <i className="bi bi-chevron-right"></i>
                                                             </div>
                                                     </div>
                                              </div>
                                 </div>
                                 <div className="modal-item">
                                         <div className="modal-icon">
-                                            <i class="bi bi-globe"></i>
+                                            <i className="bi bi-globe"></i>
                                         </div>
                                          <div className="modal-title">Ngôn ngữ</div>
                                           <div className="modal-expends">
-                                            <i class="bi bi-chevron-right"></i>
+                                            <i className="bi bi-chevron-right"></i>
                                           </div>
                                           <div className="modal-data">
                                                     <div className="modal-item">
@@ -120,11 +150,11 @@ class Home extends React.Component{
                                 </div>
                                 <div className="modal-item">
                                         <div className="modal-icon">
-                                           <i class="bi bi-patch-question"></i>
+                                           <i className="bi bi-patch-question"></i>
                                         </div>
                                          <div className="modal-title">Hỗ trợ</div>
                                           <div className="modal-expends">
-                                            <i class="bi bi-chevron-right"></i>
+                                            <i className="bi bi-chevron-right"></i>
                                           </div>
                                           <div className="modal-data">
                                                     <div className="modal-item">
@@ -175,11 +205,11 @@ class Home extends React.Component{
                             <div className="list-content">
                                 <div className="found-container">
                                     <div className="form-control">
-                                        <i class="bi bi-search"></i>
+                                        <i className="bi bi-search"></i>
                                         <input type='text' placeholder='Tìm kiếm'/>
                                     </div>
-                                    <i class="bi bi-person-plus"></i>
-                                    <i class="bi bi-person-plus-fill"></i>
+                                    <i className="bi bi-person-plus"></i>
+                                    <i className="bi bi-person-plus-fill"></i>
                                 </div>
                                 <div className="list-users">
                                         <div className="user-item active">
@@ -227,22 +257,22 @@ class Home extends React.Component{
                                     </div>
                                     <div className="content-right">
                                         <div className="icon">
-                                                    <i class="bi bi-telephone"></i>
+                                                    <i className="bi bi-telephone" onClick={() => this.sendMessage()}></i>
                                         </div>
                                         <div className="icon">
-                                                    <i class="bi bi-camera-video"></i>
+                                                    <i className="bi bi-camera-video"></i>
                                         </div>
                                         <div className="icon">
-                                                    <i class="bi bi-search"></i>
+                                                    <i className="bi bi-search"></i>
                                         </div>
                                         <div className="icon">
-                                                    <i class="bi bi-layout-sidebar-reverse"></i>
+                                                    <i className="bi bi-layout-sidebar-reverse"></i>
                                                    
                                         </div>  
                                     </div>
                                 </div>
                                 <div className="box-message">
-
+                                        <Message messages={this.state.listMessages}/>
                                 </div>
                             </div>
                             <div className="box-expends">
@@ -257,13 +287,13 @@ class Home extends React.Component{
                                         <div className="user-name">
                                             <p className="user-username">Châu Đăng Khoa</p> 
                                             <div className="edit-username">
-                                                <i class="bi bi-pencil"></i>
+                                                <i className="bi bi-pencil"></i>
                                             </div>
                                         </div>
                                         <div className="user-function">
                                             <div className="function-item">
                                                 <div className="function-item-icon">
-                                                    <i class="bi bi-bell"></i>
+                                                    <i className="bi bi-bell"></i>
                                                 </div>
                                                 <div className="function-item-title">
                                                     Tắt thông báo
@@ -272,7 +302,7 @@ class Home extends React.Component{
                                             </div>
                                             <div className="function-item"> 
                                                 <div className="function-item-icon">
-                                                    <i class="bi bi-eyedropper"></i>
+                                                    <i className="bi bi-eyedropper"></i>
                                                 </div>
                                                  <div className="function-item-title">
                                                     Ghim hội thoại
@@ -280,7 +310,7 @@ class Home extends React.Component{
                                             </div>
                                             <div className="function-item"> 
                                                  <div className="function-item-icon">
-                                                    <i class="bi bi-person-plus-fill"></i>
+                                                    <i className="bi bi-person-plus-fill"></i>
                                                 </div>
                                                  <div className="function-item-title">
                                                     Tạo nhóm trò chuyện
@@ -296,27 +326,91 @@ class Home extends React.Component{
                                             Danh sách nhắc hẹn
                                         </div>
                                     </div>
-                                    <div className="media"></div>
-                                    <div className="file"></div>
+                                    <div className="media">
+                                        <div className="media-title">
+                                            <p>Ảnh/Video</p>
+                                            <div className="media-icon">
+                                                <i className="bi bi-caret-down-fill"></i>
+                                                {/* <i className="bi bi-caret-right-fill"></i> */}
+                                            </div>
+                                        </div>
+                                        <div className="media-list">
+                                            <div className="media-item">
+                                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfUvEV4qKn_lxckDDd01lspzo2a9djhy4ZqQ&s" alt="media-picture"></img>
+                                            </div>
+                                   
+                                        </div>
+                                    </div>
+                                    <div className="file">
+                                        <div className="file-title">
+                                            <p>File</p>
+                                            <div className="media-icon">
+                                                <i className="bi bi-caret-down-fill"></i>
+                                                {/* <i className="bi bi-caret-right-fill"></i> */}
+                                            </div>
+                                        </div>
+                                        <div className="file-list">
+                                            <div className="file-item">
+                                                <div className="file-icon">
+                                                    <i class="bi bi-file-music"></i>
+                                                    {/* <i class="bi bi-camera-video"></i>
+                                                    <i class="bi bi-file-earmark-excel"></i>
+                                                    <i class="bi bi-file-text"></i> */}
+                                                </div>
+                                                <div className="file-content">
+                                                    <div className="file-content-name">Em của ngày hôm qua.mp3</div>
+                                                    <div className="file-content-size">4.38 MB</div>
+                                                </div>
+                                                <div className="file-time">Hôm qua</div>
+                                            </div>
+                                             <div className="file-item">
+                                                <div className="file-icon">
+                                                    {/* <i class="bi bi-file-music"></i> */}
+                                                    {/* <i class="bi bi-camera-video"></i> */}
+                                                    <i class="bi bi-file-earmark-excel"></i>
+                                                    {/* <i class="bi bi-file-text"></i> */}
+                                                </div>
+                                                <div className="file-content">
+                                                    <div className="file-content-name">File thống kê doanh thu năm 2024.xls</div>
+                                                    <div className="file-content-size">20.12 MB</div>
+                                                </div>
+                                                <div className="file-time">Hôm qua</div>
+                                            </div>
+                                            <div className="file-item">
+                                                <div className="file-icon">
+                                                    {/* <i class="bi bi-file-music"></i> */}
+                                                    {/* <i class="bi bi-camera-video"></i> */}
+                                                    <i class="bi bi-file-earmark-excel"></i>
+                                                    {/* <i class="bi bi-file-text"></i> */}
+                                                </div>
+                                                <div className="file-content">
+                                                    <div className="file-content-name">File thống kê doanh thu năm 2024.xls</div>
+                                                    <div className="file-content-size">20.12 MB</div>
+                                                </div>
+                                                <div className="file-time">20/10/2024</div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
                                     <div className="link"></div>
                                     <div className="security">
                                         <div className="security-title">
                                                 <p>Thiết lập bảo mật</p>
-                                                <i class="bi bi-caret-down-fill"></i>
+                                                <i className="bi bi-caret-down-fill"></i>
                                         </div>
                                         <div className="list-security">
                                             
                                             <div className="security-item1">
                                                 <div className="security-item-icon">
-                                                    <i class="bi bi-clock-history"></i>
-                                                    {/* <i class="bi bi-caret-right-fill"></i> */}
+                                                    <i className="bi bi-clock-history"></i>
+                                                    {/* <i className="bi bi-caret-right-fill"></i> */}
                                                      
                                                 </div>
                                                <div className="security-item-title1">
                                                             <div className="group">
                                                                 <p>Tin nhắn tự xóa</p> 
                                                                 <span className="security-help">
-                                                                    <i class="bi bi-patch-question"></i>
+                                                                    <i className="bi bi-patch-question"></i>
                                                                     <div className="modal-security-help">
                                                                         <p>Tin nhắn sẽ tự xóa sau khoảng thời gian cài đặt</p>
                                                                     </div>
@@ -329,14 +423,14 @@ class Home extends React.Component{
                                             </div>
                                             <div className="security-item">
                                                 <div className="security-item-icon">
-                                                    <i class="bi bi-eye-slash"></i>
+                                                    <i className="bi bi-eye-slash"></i>
                                                      
                                                 </div>
                                              <div className="security-item-title">
                                                
                                                 <p>Ẩn cuộc trò chuyện</p> 
-                                                <i class="bi bi-toggle-off"></i>
-                                                {/* <i class="bi bi-toggle-on"></i> */}
+                                                <i className="bi bi-toggle-off"></i>
+                                                {/* <i className="bi bi-toggle-on"></i> */}
                                             </div>
                                         </div>
                                         </div>
@@ -344,13 +438,13 @@ class Home extends React.Component{
                                     <div className="distroy">
                                         <div className="distroy-item">
                                             <div className="distroy-item-icon">
-                                                <i class="bi bi-exclamation-triangle"></i>
+                                                <i className="bi bi-exclamation-triangle"></i>
                                             </div>
                                             <div className="distroy-item-title">Báo xấu</div>
                                         </div>
                                         <div className="distroy-item">
                                             <div className="distroy-item-icon">
-                                                <i class="bi bi-trash"></i>
+                                                <i className="bi bi-trash"></i>
                                             </div>
                                             <div className="distroy-item-title" style={{color: "red"}}>Xóa lịch sử trò chuyện</div>
                                         </div>
@@ -363,4 +457,13 @@ class Home extends React.Component{
         )
     }
 }
-export default Home;
+const mapStateToProps  = (state) => {
+        return state;
+}
+const mapDispatchToProps = (dispatch) => ({
+    sendMessage: (data) => dispatch({
+        type: "SEND_MESSAGE",
+        payload: data
+    })
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
