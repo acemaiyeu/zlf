@@ -318,7 +318,7 @@ body{
                 }
                 .box-message{
                     background-color: rgba(209, 208, 208, 0.445);
-                    height: 760px;
+                    height: 81vh;
                     // background-color: red;
                     overflow: scroll;
                     padding: 0 10px;
@@ -326,7 +326,59 @@ body{
                 .box-message::-webkit-scrollbar {
                     display: none; /* Chrome, Safari */
                 }
-                
+                .input-container{
+                    flex: 1;
+                    background-color: white;
+                    
+                    .header-input{
+                        height: 40%;
+                        border-bottom: 0.1px solid rgba(131, 131, 131, 0.486);
+                        display: flex;
+                        align-items: center;
+                        padding: 10px;
+                        box-sizing: border-box;
+                        &>.bi{
+                            font-size: 22px;
+                            cursor: pointer;
+                            padding: 5px 10px;
+                            box-sizing: border-box;
+                            border-radius: 5px;
+                            &:hover{
+                                background-color: #b3b3b38f;
+                            }
+                        }
+                        .bi + .bi{
+                            margin-left: 10px;
+                        }
+                    }
+                    .form-input{
+                        background-color: #fff;
+                        height: 60%;
+                        display: flex;
+                        align-items: center;
+                        padding: 10px;
+                        box-sizing: border-box;
+                        input{
+                            line-height: 30px;
+                            border: none;
+                            flex: 1;
+                            outline: rgba(255, 0, 0, 0);
+                        }
+                        &>.bi{
+                            width: 30px;
+                            cursor: pointer;
+                            font-size: 25px;
+                            margin-left: 5px;
+                            
+                        }
+                        .btn-send{
+                                color: blue;
+                        }
+                        .thumup{
+                            color: orange;
+                        }
+                    }
+                }
             }
             
             .box-expends{

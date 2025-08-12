@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 class Home extends React.Component{
     state = {
         user_index: 0,
-        message: "Hello em",
+        message: "",
         listMessages: [],
         n_rand: 0
     }
@@ -17,6 +17,9 @@ class Home extends React.Component{
         this.props.sendMessage({
             user_index: this.state.user_index,
             message: this.state.message
+        })
+        this.setState({
+            message: ""
         })
     }
       componentDidMount(){
@@ -273,7 +276,29 @@ class Home extends React.Component{
                                 </div>
                                 <div className="box-message">
                                         <Message messages={this.state.listMessages}/>
+                                        
                                 </div>
+                                <div className="input-container">
+                                            <div className="header-input">
+                                                    <i class="bi bi-emoji-grin" title="Gửi sticker"></i>
+                                                    <i class="bi bi-card-image" title="Gửi hình ảnh"></i>
+                                                    <i class="bi bi-paperclip" title="Đính kèm file"></i>
+                                                    <i class="bi bi-person-vcard" title="Gửi danh thiếp"></i>
+                                                    <i class="bi bi-fullscreen" title="Chụp kèm với cửa sổ ZLF"></i>
+                                                    
+                                                    <i class="bi bi-type" title="Định dạng tin nhắn (Ctrl + Shift + X)"></i>
+                                                    <i class="bi bi-chat-left-text" title="Chèn tin nhắn nhanh"></i>
+                                                    <i class="bi bi-three-dots" title="Tùy chọn thêm"></i>
+                                            </div>
+                                            <div className="form-input">
+                                                <input value={this.state.message} type='text' placeholder='Nhập @, tin nhắn tới Châu Đăng Khoa' onChange={(e) => this.setState({message: e.target.value})}/>
+                                                
+                                                <i class="bi bi-emoji-smile"></i>
+                                                {this.state.message != "" ? <i class="bi bi-send-fill btn-send" onClick={() => this.sendMessage()}></i> : <i class="bi bi-hand-thumbs-up-fill thumup"></i>}
+                                                
+                                                
+                                            </div>
+                                        </div>
                             </div>
                             <div className="box-expends">
                                 <div className="box-expends-header">
