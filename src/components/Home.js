@@ -10,7 +10,8 @@ class Home extends React.Component{
         user_index: 0,
         message: "",
         listMessages: [],
-        n_rand: 0
+        n_rand: 0,
+        listStickers: []
     }
 
     sendMessage = () => {
@@ -22,22 +23,31 @@ class Home extends React.Component{
             message: ""
         })
     }
+    sendSticker = (link) => {
+        this.props.sendSticker({
+            user_index: this.state.user_index,
+            icon: link
+        })
+    }
       componentDidMount(){
         this.setState({
-            listMessages: this.props.listUsers[0].listMessage
+            listMessages: this.props.listUsers[0].listMessage,
+            listStickers: this.props.listStickers
         })
     }
        componentDidUpdate(prevProps) {
         
         if (prevProps.n_rand !== this.props.n_rand) {
                 this.setState({
-                    messages: this.props.messages
+                    messages: this.props.messages,
+                    listStickers: this.props.listStickers
                 });
             }
         }
 
     render() {
-        console.log("Home Rerender")
+        let { listStickers } = this.state;
+        console.log("State: ", this.state)
         return (
             <div className="home-container">
                 <div className="left">
@@ -279,6 +289,12 @@ class Home extends React.Component{
                                         
                                 </div>
                                 <div className="input-container">
+                                            <div className="header-input-modal">
+                                                {listStickers && listStickers.length > 0 && listStickers.map((item) => {
+                                                    return (<img onClick={() => this.sendSticker(item.link)}  src={item.link} alt="sticker/emochi"/>)
+                                                })}
+                                                
+                                            </div>
                                             <div className="header-input">
                                                     <i class="bi bi-emoji-grin" title="Gửi sticker"></i>
                                                     <i class="bi bi-card-image" title="Gửi hình ảnh"></i>
@@ -487,6 +503,10 @@ const mapStateToProps  = (state) => {
 }
 const mapDispatchToProps = (dispatch) => ({
     sendMessage: (data) => dispatch({
+        type: "SEND_MESSAGE",
+        payload: data
+    }),
+     sendSticker: (data) => dispatch({
         type: "SEND_MESSAGE",
         payload: data
     })
