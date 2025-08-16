@@ -29,6 +29,15 @@ class Home extends React.Component{
             icon: link
         })
     }
+    messageChange = (e) => {
+        
+        this.setState({
+            message: e.target.value
+        })
+        if (e.key === 'Enter') {
+            this.sendMessage();
+        }
+    }   
       componentDidMount(){
         this.setState({
             listMessages: this.props.listUsers[0].listMessage,
@@ -307,7 +316,7 @@ class Home extends React.Component{
                                                     <i class="bi bi-three-dots" title="Tùy chọn thêm"></i>
                                             </div>
                                             <div className="form-input">
-                                                <input value={this.state.message} type='text' placeholder='Nhập @, tin nhắn tới Châu Đăng Khoa' onChange={(e) => this.setState({message: e.target.value})}/>
+                                                <input value={this.state.message} type='text' placeholder='Nhập @, tin nhắn tới Châu Đăng Khoa' onChange={(e) => this.messageChange(e)} onKeyDown={(e) => this.messageChange(e)}/>
                                                 
                                                 <i class="bi bi-emoji-smile"></i>
                                                 {this.state.message != "" ? <i class="bi bi-send-fill btn-send" onClick={() => this.sendMessage()}></i> : <i class="bi bi-hand-thumbs-up-fill thumup"></i>}
