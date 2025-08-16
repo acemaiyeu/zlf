@@ -2,7 +2,7 @@ import React from 'react'
 import "../scss/Home.scss"
 import logo_vn from '../asset/img/logo_vn.png'
 import logo_en from '../asset/img/istockphoto-1042208442-612x612.jpg'
-import video from '../asset/video/MV EM CHẲNG ĐÀNH - Miu Lê  OST HẸN YÊU - KIM ENTERTAINMENT (720p, h264).mp4'
+// import video from '../asset/video/MV EM CHẲNG ĐÀNH - Miu Lê  OST HẸN YÊU - KIM ENTERTAINMENT (720p, h264).mp4'
 import Message from './Message'
 import {connect} from 'react-redux'
 class Home extends React.Component{
@@ -11,7 +11,8 @@ class Home extends React.Component{
         message: "",
         listMessages: [],
         n_rand: 0,
-        listStickers: []
+        listStickers: [],
+        show_sticker: false
     }
 
     sendMessage = () => {
@@ -37,6 +38,15 @@ class Home extends React.Component{
         if (e.key === 'Enter') {
             this.sendMessage();
         }
+        if (e.target.value.slice(0, 8) === "@sticker" || e.target.value.slice(0, 8) === "@STICKER") {
+            this.setState({
+                show_sticker: true
+            })
+        }else{
+            this.setState({
+                show_sticker: false
+            })
+        }
     }   
       componentDidMount(){
         this.setState({
@@ -55,8 +65,8 @@ class Home extends React.Component{
         }
 
     render() {
-        let { listStickers } = this.state;
-        console.log("State: ", this.state)
+        let { listStickers, show_sticker } = this.state;
+        console.log("Home rerender: ", this.state)
         return (
             <div className="home-container">
                 <div className="left">
@@ -294,32 +304,34 @@ class Home extends React.Component{
                                     </div>
                                 </div>
                                 <div className="box-message">
-                                        <Message messages={this.state.listMessages}/>
+                                        <Message messages={this.state.listMessages ?? []}/>
                                         
                                 </div>
                                 <div className="input-container">
+                                    {show_sticker && 
                                             <div className="header-input-modal">
                                                 {listStickers && listStickers.length > 0 && listStickers.map((item) => {
                                                     return (<img onClick={() => this.sendSticker(item.link)}  src={item.link} alt="sticker/emochi"/>)
                                                 })}
                                                 
                                             </div>
+        }
                                             <div className="header-input">
-                                                    <i class="bi bi-emoji-grin" title="Gửi sticker"></i>
-                                                    <i class="bi bi-card-image" title="Gửi hình ảnh"></i>
-                                                    <i class="bi bi-paperclip" title="Đính kèm file"></i>
-                                                    <i class="bi bi-person-vcard" title="Gửi danh thiếp"></i>
-                                                    <i class="bi bi-fullscreen" title="Chụp kèm với cửa sổ ZLF"></i>
+                                                    <i className="bi bi-emoji-grin" title="Gửi sticker"></i>
+                                                    <i className="bi bi-card-image" title="Gửi hình ảnh"></i>
+                                                    <i className="bi bi-paperclip" title="Đính kèm file"></i>
+                                                    <i className="bi bi-person-vcard" title="Gửi danh thiếp"></i>
+                                                    <i className="bi bi-fullscreen" title="Chụp kèm với cửa sổ ZLF"></i>
                                                     
-                                                    <i class="bi bi-type" title="Định dạng tin nhắn (Ctrl + Shift + X)"></i>
-                                                    <i class="bi bi-chat-left-text" title="Chèn tin nhắn nhanh"></i>
-                                                    <i class="bi bi-three-dots" title="Tùy chọn thêm"></i>
+                                                    <i className="bi bi-type" title="Định dạng tin nhắn (Ctrl + Shift + X)"></i>
+                                                    <i className="bi bi-chat-left-text" title="Chèn tin nhắn nhanh"></i>
+                                                    <i className="bi bi-three-dots" title="Tùy chọn thêm"></i>
                                             </div>
                                             <div className="form-input">
                                                 <input value={this.state.message} type='text' placeholder='Nhập @, tin nhắn tới Châu Đăng Khoa' onChange={(e) => this.messageChange(e)} onKeyDown={(e) => this.messageChange(e)}/>
                                                 
-                                                <i class="bi bi-emoji-smile"></i>
-                                                {this.state.message != "" ? <i class="bi bi-send-fill btn-send" onClick={() => this.sendMessage()}></i> : <i class="bi bi-hand-thumbs-up-fill thumup"></i>}
+                                                <i className="bi bi-emoji-smile"></i>
+                                                {this.state.message !== "" ? <i className="bi bi-send-fill btn-send" onClick={() => this.sendMessage()}></i> : <i className="bi bi-hand-thumbs-up-fill thumup"></i>}
                                                 
                                                 
                                             </div>
@@ -386,7 +398,7 @@ class Home extends React.Component{
                                         </div>
                                         <div className="media-list">
                                             <div className="media-item">
-                                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfUvEV4qKn_lxckDDd01lspzo2a9djhy4ZqQ&s" alt="media-picture"></img>
+                                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfUvEV4qKn_lxckDDd01lspzo2a9djhy4ZqQ&s" alt="media" />
                                             </div>
                                    
                                         </div>
@@ -402,10 +414,10 @@ class Home extends React.Component{
                                         <div className="file-list">
                                             <div className="file-item">
                                                 <div className="file-icon">
-                                                    <i class="bi bi-file-music"></i>
-                                                    {/* <i class="bi bi-camera-video"></i>
-                                                    <i class="bi bi-file-earmark-excel"></i>
-                                                    <i class="bi bi-file-text"></i> */}
+                                                    <i className="bi bi-file-music"></i>
+                                                    {/* <i className="bi bi-camera-video"></i>
+                                                    <i className="bi bi-file-earmark-excel"></i>
+                                                    <i className="bi bi-file-text"></i> */}
                                                 </div>
                                                 <div className="file-content">
                                                     <div className="file-content-name">Em của ngày hôm qua.mp3</div>
@@ -415,10 +427,10 @@ class Home extends React.Component{
                                             </div>
                                              <div className="file-item">
                                                 <div className="file-icon">
-                                                    {/* <i class="bi bi-file-music"></i> */}
-                                                    {/* <i class="bi bi-camera-video"></i> */}
-                                                    <i class="bi bi-file-earmark-excel"></i>
-                                                    {/* <i class="bi bi-file-text"></i> */}
+                                                    {/* <i className="bi bi-file-music"></i> */}
+                                                    {/* <i className="bi bi-camera-video"></i> */}
+                                                    <i className="bi bi-file-earmark-excel"></i>
+                                                    {/* <i className="bi bi-file-text"></i> */}
                                                 </div>
                                                 <div className="file-content">
                                                     <div className="file-content-name">File thống kê doanh thu năm 2024.xls</div>
@@ -428,10 +440,10 @@ class Home extends React.Component{
                                             </div>
                                             <div className="file-item">
                                                 <div className="file-icon">
-                                                    {/* <i class="bi bi-file-music"></i> */}
-                                                    {/* <i class="bi bi-camera-video"></i> */}
-                                                    <i class="bi bi-file-earmark-excel"></i>
-                                                    {/* <i class="bi bi-file-text"></i> */}
+                                                    {/* <i className="bi bi-file-music"></i> */}
+                                                    {/* <i className="bi bi-camera-video"></i> */}
+                                                    <i className="bi bi-file-earmark-excel"></i>
+                                                    {/* <i className="bi bi-file-text"></i> */}
                                                 </div>
                                                 <div className="file-content">
                                                     <div className="file-content-name">File thống kê doanh thu năm 2024.xls</div>

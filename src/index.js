@@ -354,8 +354,7 @@ function getCurrentTime() {
     return `${hours}:${minutes} ${day}/${month}/${year}`;
 }
 
-// Ví dụ dùng
-console.log(getCurrentTime());
+
 
 
 const store = createStore(reducer)

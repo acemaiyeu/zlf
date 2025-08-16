@@ -1,7 +1,7 @@
 // App.js
 import React from 'react'
 import { connect } from 'react-redux'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import Home from '../src/components/Home'
 
 function App(props) {
