@@ -66,7 +66,6 @@ class Home extends React.Component{
 
     render() {
         let { listStickers, show_sticker } = this.state;
-        console.log("Home rerender: ", this.state)
         return (
             <div className="home-container">
                 <div className="left">
