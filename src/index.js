@@ -283,6 +283,10 @@ const initState = {
                         message: "",
                         icon: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmgwNjNhMThhbW8wMDh3dW9hZDkzZjBwaWt5aTRhbnhzazc1dG95diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dsPBfiEEozyXUXShhB/giphy.gif",
                         time: "11:26 12/08/2025"
+                    },{
+                        message: "Chào anh a",
+                        icon: "",
+                        time: "20:25 17/08/2025"
                     }
                 ]
             }
