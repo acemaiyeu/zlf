@@ -4,6 +4,7 @@
     .list-message{
         display: flex;
         flex-direction: column;
+        margin: 5px 0;
         .form-message{
             min-height: 50px;
             display: flex;
@@ -14,6 +15,7 @@
             padding: 5px 10px ;
             margin-bottom: 10px;
             border-radius: 5px;
+            width: fit-content;
         }
         .icon-message{
             width: 100px;

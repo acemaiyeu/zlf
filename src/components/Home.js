@@ -9,7 +9,12 @@ class Home extends React.Component{
     state = {
         user_index: 0,
         message: "",
+        active_user: {
+            name: "Châu Đăng Khoa 2",
+            avatar: "https://scontent.fsgn5-5.fna.fbcdn.net/v/t39.30808-1/500058654_3999422733706244_5664473045642803434_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeEPw72Yy8CC-O4linvvY_2mIPh9XTMQ5oMg-H1dMxDmg5xI52fSAbYZ_s-62__J2g2cT8N-qWMvh0y5CP0u_SlH&_nc_ohc=lf5lblEu9EQQ7kNvwF4YtBV&_nc_oc=AdkG6UJ4Q62wFrp9loz5sPeoegh21gIiEtJeujIKeHxqJgVpR1cN1ipsAG58KScmjKTv9urzToD_ZGaLclidBvRN&_nc_zt=24&_nc_ht=scontent.fsgn5-5.fna&_nc_gid=L6-NMrePrVFcYrKb_uI6yQ&oh=00_AfWguMdgPfeWcPQiR2u48sT80nKqUzIyzX3SYDm7UjjuRA&oe=689BC096"
+        },
         listMessages: [],
+        listUsers: this.props.listUsers,
         n_rand: 0,
         listStickers: [],
         show_sticker: false
@@ -29,6 +34,21 @@ class Home extends React.Component{
             user_index: this.state.user_index,
             icon: link
         })
+        this.setState({
+            message: this.state.message.replaceAll("@sticker", "").replaceAll("@STICKER", ""),
+            show_sticker: false
+        })
+    }
+    handleClickUser = (index) => {
+            this.setState({
+                user_index: index,
+                listMessages: this.props.listUsers[index].listMessage,
+                show_sticker: false,
+                message: "",
+                active_user: {
+                    name: this.props.listUsers[index??this.state.user_index].fullname,
+                },    
+            })
     }
     messageChange = (e) => {
         
@@ -65,7 +85,8 @@ class Home extends React.Component{
         }
 
     render() {
-        let { listStickers, show_sticker } = this.state;
+        let { listStickers, show_sticker, active_user, listUsers, user_index} = this.state;
+        console.log("listUsers", listUsers);
         return (
             <div className="home-container">
                 <div className="left">
@@ -243,12 +264,14 @@ class Home extends React.Component{
                                     <i className="bi bi-person-plus-fill"></i>
                                 </div>
                                 <div className="list-users">
-                                        <div className="user-item active">
+                                    { listUsers && listUsers.length > 0 && listUsers.map((item, index) => {
+                                        return (
+                                        <div key={index} className={`user-item ${index === user_index ? "active" : ""}`} onClick={() => this.handleClickUser(index)} >
                                             <div className="user-avatar">
-                                                 <img src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t39.30808-1/500058654_3999422733706244_5664473045642803434_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeEPw72Yy8CC-O4linvvY_2mIPh9XTMQ5oMg-H1dMxDmg5xI52fSAbYZ_s-62__J2g2cT8N-qWMvh0y5CP0u_SlH&_nc_ohc=lf5lblEu9EQQ7kNvwF4YtBV&_nc_oc=AdkG6UJ4Q62wFrp9loz5sPeoegh21gIiEtJeujIKeHxqJgVpR1cN1ipsAG58KScmjKTv9urzToD_ZGaLclidBvRN&_nc_zt=24&_nc_ht=scontent.fsgn5-5.fna&_nc_gid=L6-NMrePrVFcYrKb_uI6yQ&oh=00_AfWguMdgPfeWcPQiR2u48sT80nKqUzIyzX3SYDm7UjjuRA&oe=689BC096" alt="avatar"/>
+                                                 <img loadding="lazy" src={item.avatar} alt="avatar"/>
                                             </div>
                                             <div className="user-content">
-                                                <p className="user-name">Châu Đăng Khoa</p>
+                                                <p className="user-name">{item.fullname}</p>
                                                 <p className="message">Đr em</p>
                                             </div>
                                             <div className="user-more">
@@ -258,21 +281,8 @@ class Home extends React.Component{
                                                 {/* <p>4 giờ</p> */}
                                             </div>
                                         </div>
-                                         <div className="user-item">
-                                            <div className="user-avatar">
-                                                 <img src="https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg" alt="avatar"/>
-                                            </div>
-                                            <div className="user-content">
-                                                <p className="user-name">Châu Đăng Khoa</p>
-                                                <p className="message">Đr em</p>
-                                            </div>
-                                            <div className="user-more">
-                                                {/* <div className="">
-                                                    <img />
-                                                </div> */}
-                                                <p>4 giờ</p>
-                                            </div>
-                                        </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                             <div className="content">
@@ -304,9 +314,11 @@ class Home extends React.Component{
                                 </div>
                                 <div className="box-message">
                                         <Message messages={this.state.listMessages ?? []}/>
-                                        
                                 </div>
                                 <div className="input-container">
+                                    <div className="typing-container">
+                                        <p>{active_user?.name ?? ""} đang soạn tin nhắn</p>
+                                    </div>
                                     {show_sticker && 
                                             <div className="header-input-modal">
                                                 {listStickers && listStickers.length > 0 && listStickers.map((item) => {
