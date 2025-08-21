@@ -37,14 +37,18 @@ class MessageLeft extends React.Component {
     render() {
         const { messages } = this.props;
         const currentTime = Date.now();
+        let { is_show } = this.props;
         // console.log("Messages in MessageLeft:", currentTime - changeDateTextToTime(messages[1].time), currentTime);
         return (
+            
             <div className="list-message">
                 {messages.map((item, index) => {
                     const isRecent = currentTime - changeDateTextToTime(item.time) < 100000; // 10s
                     const isLastMessage = index === messages.length - 1;
-
+                    // alert("Ishow: " + is_show);
                     return (
+                        <>
+                        {(index < messages.length - 1 || is_show === 1) && (
                         <div key={item.time}>
                             {item.message !== "" && (
                                 <div className={`form-message mess-left ${isRecent && isLastMessage ? "typing" : ""}`}>
@@ -56,6 +60,8 @@ class MessageLeft extends React.Component {
                                 <img className="icon-message" src={item.icon} alt="icon" />
                             )}
                         </div>
+                        )}
+                        </>
                     );
                 })}
             </div>

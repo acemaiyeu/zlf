@@ -261,7 +261,7 @@ const initState = {
   ],
   listUsers: [
     {
-      fullname: "Bạn xã nhỏ",
+      fullname: "Bà xã nhỏ",
       avatar:
         "https://play-lh.googleusercontent.com/K7STyDQJpIF-5YON7Df-xZRfYEmr7zZoo0Ui-VF3_EkZq2Q_70G1fW20w0fb4-H86Ns",
       introduce: "Vì thương mà đến",
@@ -284,9 +284,14 @@ const initState = {
                         icon: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmgwNjNhMThhbW8wMDh3dW9hZDkzZjBwaWt5aTRhbnhzazc1dG95diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dsPBfiEEozyXUXShhB/giphy.gif",
                         time: "11:26 12/08/2025"
                     },{
-                        message: "Chào anh a",
+                        message: "Chào anh ạ",
                         icon: "",
-                        time: "20:25 17/08/2025"
+                        time: "23:25 17/08/2025"
+                    },
+                    {
+                        message: "Anh đang làm gì vậy?",
+                        icon: "",
+                        time: "23:32 21/08/2025"
                     }
                 ]
             }

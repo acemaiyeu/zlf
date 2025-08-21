@@ -6,7 +6,8 @@ class Message extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            messages: []
+            messages: [],
+            is_show: this.props.is_show || 0 // nhận is_show từ props
         };
         this.messagesEndRef = React.createRef(); // ref để cuộn xuống cuối
     }
@@ -14,7 +15,8 @@ class Message extends React.Component {
     componentDidUpdate(prevProps) {
         if (prevProps.messages !== this.props.messages) {
             this.setState({
-                messages: this.props.messages
+                messages: this.props.messages,
+                is_show: this.props.is_show || 0 // nhận is_show từ props
             }, () => {
                 this.scrollToBottom(); // cuộn sau khi state cập nhật
             });
@@ -31,6 +33,7 @@ class Message extends React.Component {
 
     render() {
         let { messages } = this.state;
+        let { is_show } = this.props;
         return (
             <div className="message-container" style={{overflowY: "auto"}}>
                 {messages && messages.length > 0 && messages.map((item, index) => {
@@ -49,7 +52,7 @@ class Message extends React.Component {
                                 </div> 
                             }
                             {item.type !== "me" && 
-                                <MessageLeft messages={item.messages}/>
+                                <MessageLeft messages={item.messages} is_show={is_show}/>
                             }
                         </div> 
                     )

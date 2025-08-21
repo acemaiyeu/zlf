@@ -10,14 +10,15 @@ class Home extends React.Component{
         user_index: 0,
         message: "",
         active_user: {
-            name: "Châu Đăng Khoa 2",
+            name: "Bà xã nhỏ",
             avatar: "https://scontent.fsgn5-5.fna.fbcdn.net/v/t39.30808-1/500058654_3999422733706244_5664473045642803434_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeEPw72Yy8CC-O4linvvY_2mIPh9XTMQ5oMg-H1dMxDmg5xI52fSAbYZ_s-62__J2g2cT8N-qWMvh0y5CP0u_SlH&_nc_ohc=lf5lblEu9EQQ7kNvwF4YtBV&_nc_oc=AdkG6UJ4Q62wFrp9loz5sPeoegh21gIiEtJeujIKeHxqJgVpR1cN1ipsAG58KScmjKTv9urzToD_ZGaLclidBvRN&_nc_zt=24&_nc_ht=scontent.fsgn5-5.fna&_nc_gid=L6-NMrePrVFcYrKb_uI6yQ&oh=00_AfWguMdgPfeWcPQiR2u48sT80nKqUzIyzX3SYDm7UjjuRA&oe=689BC096"
         },
         listMessages: [],
         listUsers: this.props.listUsers,
         n_rand: 0,
         listStickers: [],
-        show_sticker: false
+        show_sticker: false,
+        is_show: 0
     }
 
     sendMessage = () => {
@@ -85,8 +86,12 @@ class Home extends React.Component{
         }
 
     render() {
-        let { listStickers, show_sticker, active_user, listUsers, user_index} = this.state;
-        console.log("listUsers", listUsers);
+        let { listStickers, show_sticker, active_user, listUsers, user_index, is_show} = this.state;
+        setTimeout(() => {
+            this.setState({
+                is_show: 1
+            })
+        },5000)
         return (
             <div className="home-container">
                 <div className="left">
@@ -313,12 +318,15 @@ class Home extends React.Component{
                                     </div>
                                 </div>
                                 <div className="box-message">
-                                        <Message messages={this.state.listMessages ?? []}/>
+                                        <Message messages={this.state.listMessages ?? []} is_show={is_show}/>
                                 </div>
                                 <div className="input-container">
-                                    <div className="typing-container">
-                                        <p>{active_user?.name ?? ""} đang soạn tin nhắn</p>
-                                    </div>
+                                    {is_show === 0 && 
+                                        <div className="typing-container">
+                                            <p>{active_user?.name ?? ""} đang soạn tin nhắn</p>
+                                        </div>
+                                    }
+                                    
                                     {show_sticker && 
                                             <div className="header-input-modal">
                                                 {listStickers && listStickers.length > 0 && listStickers.map((item) => {
