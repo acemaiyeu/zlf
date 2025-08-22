@@ -37,18 +37,20 @@ class MessageLeft extends React.Component {
     render() {
         const { messages } = this.props;
         const currentTime = Date.now();
+        // console.log("Current time:", currentTime, messages ? messages[messages.length - 1 ].time : "", changeDateTextToTime(messages ? messages[messages.length - 1 ].time : ""), currentTime - changeDateTextToTime(messages ? messages[messages.length - 1 ].time : ""));
         let { is_show } = this.props;
         // console.log("Messages in MessageLeft:", currentTime - changeDateTextToTime(messages[1].time), currentTime);
         return (
             
             <div className="list-message">
                 {messages.map((item, index) => {
-                    const isRecent = currentTime - changeDateTextToTime(item.time) < 100000; // 10s
+                    const isRecent = currentTime - changeDateTextToTime(item.time) < 10000; // 10s
                     const isLastMessage = index === messages.length - 1;
+                    // {console.log("isRecent: " + isRecent + " isLastMessage: " + isLastMessage + " index: " + index + " length: " + messages.length);}
                     // alert("Ishow: " + is_show);
                     return (
                         <>
-                        {(index < messages.length - 1 || is_show === 1) && (
+                        {(index < messages.length - 1 || is_show === 1 || !isRecent) && (
                         <div key={item.time}>
                             {item.message !== "" && (
                                 <div className={`form-message mess-left ${isRecent && isLastMessage ? "typing" : ""}`}>

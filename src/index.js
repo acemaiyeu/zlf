@@ -270,7 +270,7 @@ const initState = {
       birthday: "2000-01-01",
       number_phone: "0123456789",
       listMessage: [
-        {
+            {
                 type: "me",
                 message: "Xin chào",
                 icon: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmgwNjNhMThhbW8wMDh3dW9hZDkzZjBwaWt5aTRhbnhzazc1dG95diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dsPBfiEEozyXUXShhB/giphy.gif",
@@ -294,7 +294,27 @@ const initState = {
                         time: "23:32 21/08/2025"
                     }
                 ]
-            }
+            },
+            {
+                type: "me",
+                message: "Đang nhắn tin cho em nè",
+                icon: "",
+                time: ""
+            },
+            {
+                type: "Thanh",
+                messages: [
+                    {
+                        message: "Vâng ạ",
+                        icon: "",
+                        time: "11:26 12/08/2025"
+                    },{
+                        message: "Nay làm việc như nào",
+                        icon: "",
+                        time: "21:01 22/08/2025"
+                    }
+                ]
+            },
       ],
     },
     {

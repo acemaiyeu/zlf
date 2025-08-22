@@ -52,7 +52,6 @@ class Home extends React.Component{
             })
     }
     messageChange = (e) => {
-        
         this.setState({
             message: e.target.value
         })
@@ -75,6 +74,14 @@ class Home extends React.Component{
             listStickers: this.props.listStickers
         })
     }
+    changeDateTextToTime = (time_text) => {
+        const [timePart, datePart] = time_text.split(" ");
+        const [hours, minutes] = timePart.split(":").map(Number);
+        const [day, month, year] = datePart.split("/").map(Number);
+
+        console.log("Parsed time:", hours, minutes, day, month, year);
+    return new Date(year, month - 1, day, hours, minutes).getTime();
+};
        componentDidUpdate(prevProps) {
         
         if (prevProps.n_rand !== this.props.n_rand) {
@@ -84,14 +91,19 @@ class Home extends React.Component{
                 });
             }
         }
+        
 
     render() {
-        let { listStickers, show_sticker, active_user, listUsers, user_index, is_show} = this.state;
+        let { listStickers, show_sticker, active_user, listUsers, user_index, is_show, listMessages} = this.state;
+        let speed_load = (listMessages?.[listMessages.length - 1]?.messages[listMessages?.[listMessages.length - 1]?.messages.length - 1]?.message.length * 500) || 0;
         setTimeout(() => {
+            let currentTime = Date.now();
+            const isRecent = currentTime - this.changeDateTextToTime(listMessages ? (listMessages[listMessages.length - 1].messages !== "undefined" ? listMessages[listMessages.length - 1].messages[listMessages[listMessages.length - 1].messages.length - 1].time : "") : "") < 10000;
             this.setState({
                 is_show: 1
             })
-        },5000)
+        }, speed_load)
+        
         return (
             <div className="home-container">
                 <div className="left">
