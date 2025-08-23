@@ -52,7 +52,7 @@ class Message extends React.Component {
                                 </div> 
                             }
                             {item.type !== "me" && 
-                                <MessageLeft messages={item.messages} is_show={is_show}/>
+                                <MessageLeft messages={item.messages} is_show={is_show} last_item={index === messages.length - 1 ? true : false} />
                             }
                         </div> 
                     )

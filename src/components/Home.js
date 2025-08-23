@@ -11,8 +11,8 @@ class Home extends React.Component{
         user_index: 0,
         message: "",
         active_user: {
-            name: "Bà xã nhỏ",
-            avatar: "https://scontent.fsgn5-5.fna.fbcdn.net/v/t39.30808-1/500058654_3999422733706244_5664473045642803434_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeEPw72Yy8CC-O4linvvY_2mIPh9XTMQ5oMg-H1dMxDmg5xI52fSAbYZ_s-62__J2g2cT8N-qWMvh0y5CP0u_SlH&_nc_ohc=lf5lblEu9EQQ7kNvwF4YtBV&_nc_oc=AdkG6UJ4Q62wFrp9loz5sPeoegh21gIiEtJeujIKeHxqJgVpR1cN1ipsAG58KScmjKTv9urzToD_ZGaLclidBvRN&_nc_zt=24&_nc_ht=scontent.fsgn5-5.fna&_nc_gid=L6-NMrePrVFcYrKb_uI6yQ&oh=00_AfWguMdgPfeWcPQiR2u48sT80nKqUzIyzX3SYDm7UjjuRA&oe=689BC096"
+            name: "",
+            avatar: ""
         },
         listMessages: [],
         listUsers: this.props.listUsers,
@@ -51,6 +51,7 @@ class Home extends React.Component{
                 message: "",
                 active_user: {
                     name: this.props.listUsers[index??this.state.user_index].fullname,
+                    avatar: this.props.listUsers[index??this.state.user_index].avatar
                 },    
             })
     }
@@ -75,7 +76,11 @@ class Home extends React.Component{
         document.querySelector(".input").focus();
         this.setState({
             listMessages: this.props.listUsers[0].listMessage,
-            listStickers: this.props.listStickers
+            listStickers: this.props.listStickers,
+            active_user: {
+                name: this.props.listUsers[0].fullname,
+                avatar: this.props.listUsers[0].avatar
+            },
         })   
     }
     changeDateTextToTime = (time_text) => {
@@ -325,10 +330,10 @@ class Home extends React.Component{
                                 <div className="content-header">
                                     <div className="content-left">
                                         <div className="content-avatar">
-                                            <img src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t39.30808-1/500058654_3999422733706244_5664473045642803434_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeEPw72Yy8CC-O4linvvY_2mIPh9XTMQ5oMg-H1dMxDmg5xI52fSAbYZ_s-62__J2g2cT8N-qWMvh0y5CP0u_SlH&_nc_ohc=lf5lblEu9EQQ7kNvwF4YtBV&_nc_oc=AdkG6UJ4Q62wFrp9loz5sPeoegh21gIiEtJeujIKeHxqJgVpR1cN1ipsAG58KScmjKTv9urzToD_ZGaLclidBvRN&_nc_zt=24&_nc_ht=scontent.fsgn5-5.fna&_nc_gid=L6-NMrePrVFcYrKb_uI6yQ&oh=00_AfWguMdgPfeWcPQiR2u48sT80nKqUzIyzX3SYDm7UjjuRA&oe=689BC096" alt="avatar"/>
+                                            <img src={active_user?.avatar} alt="avatar"/>
                                         </div>
                                         <div className="content-body">
-                                            <div className="content-username">Châu Đăng Khoa</div>
+                                            <div className="content-username">{active_user?.name}</div>
                                             <div className="content-status">Vừa mới truy cập <span>|</span></div>
                                         </div>
                                     </div>
@@ -378,7 +383,7 @@ class Home extends React.Component{
                                                     <i className="bi bi-three-dots" title="Tùy chọn thêm"></i>
                                             </div>
                                             <div className="form-input">
-                                                <input value={this.state.message} type='text' className="input" placeholder='Nhập @, tin nhắn tới Châu Đăng Khoa' onChange={(e) => this.messageChange(e)} onKeyDown={(e) => this.messageChange(e)}/>
+                                                <input value={this.state.message} type='text' className="input" placeholder={`Nhập @, tin nhắn tới ${active_user.name}`} onChange={(e) => this.messageChange(e)} onKeyDown={(e) => this.messageChange(e)}/>
                                                 
                                                 <i className="bi bi-emoji-smile"></i>
                                                 {this.state.message !== "" ? <i className="bi bi-send-fill btn-send" onClick={() => this.sendMessage()}></i> : <i className="bi bi-hand-thumbs-up-fill thumup"></i>}

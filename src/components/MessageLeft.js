@@ -32,21 +32,24 @@
 
 import React from "react";
 import "../scss/MessageLeft.scss"; // Import the MessageLeft component 
+import { TIME_SHOW_TYPING } from '../constants/constants'
 
 class MessageLeft extends React.Component {
     render() {
-        const { messages } = this.props;
-        const currentTime = Date.now();
-        let { is_show } = this.props;
+        let { messages, is_show } = this.props;
+        let currentTime = Date.now();
+       const isRecent = messages && messages.length > 0
+            ? 
+                (currentTime -  changeDateTextToTime((messages?.[messages.length - 1]?.time || "")) 
+                                < TIME_SHOW_TYPING)
+            : false;  
         return (
             
             <div className="list-message">
                 {messages.map((item, index) => {
-                    const isRecent = currentTime - changeDateTextToTime(item.time) < 10000; // 10s
-                    const isLastMessage = index === messages.length - 1;
                     return (
                         <>
-                        {(index < messages.length - 1 || is_show === 1) && (
+                        {((index <= messages.length || is_show === 1) && !isRecent)  && (
                         <div key={item.time}>
                             {item.message !== "" && (
                                 <div className={`form-message mess-left`}>
@@ -66,7 +69,7 @@ class MessageLeft extends React.Component {
         );
     }
 }
-const changeDateTextToTime = (time_text) => {
+  const changeDateTextToTime = (time_text) => {
         const [timePart, datePart] = time_text.split(" ");
         const [hours, minutes, seconds = 0] = timePart.split(":").map(Number); // thêm giây
         const [day, month, year] = datePart.split("/").map(Number);
