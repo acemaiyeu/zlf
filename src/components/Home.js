@@ -5,6 +5,7 @@ import logo_en from '../asset/img/istockphoto-1042208442-612x612.jpg'
 // import video from '../asset/video/MV EM CHẲNG ĐÀNH - Miu Lê  OST HẸN YÊU - KIM ENTERTAINMENT (720p, h264).mp4'
 import Message from './Message'
 import {connect} from 'react-redux'
+import { SPEED_REPLAY, TIME_SHOW_TYPING } from '../constants/constants'
 class Home extends React.Component{
     state = {
         user_index: 0,
@@ -29,6 +30,7 @@ class Home extends React.Component{
         this.setState({
             message: ""
         })
+        document.querySelector(".input").focus();
     }
     sendSticker = (link) => {
         this.props.sendSticker({
@@ -39,6 +41,7 @@ class Home extends React.Component{
             message: this.state.message.replaceAll("@sticker", "").replaceAll("@STICKER", ""),
             show_sticker: false
         })
+        document.querySelector(".input").focus();
     }
     handleClickUser = (index) => {
             this.setState({
@@ -93,13 +96,19 @@ class Home extends React.Component{
                 }
             clearTimeout(this.run_typing);
             let currentTime = Date.now();
-            const isRecent = listMessages?.time
-                    ? currentTime - this.changeDateTextToTime(listMessages.time) < 10000
+            const isRecent = listMessages && listMessages.length > 0
+                    ? 
+                        (currentTime -  
+                        this.changeDateTextToTime((listMessages?.[listMessages.length - 1]?.messages[listMessages?.[listMessages.length - 1]?.messages.length - 1]?.time) || "") 
+                        < TIME_SHOW_TYPING)
                     : false;  
-                console.log("CHecccck: ", isRecent, listMessages)
-            let speed_load = isRecent ? (listMessages?.[listMessages.length - 1]?.messages[listMessages?.[listMessages.length - 1]?.messages.length - 1]?.message.length * 500) : 0;
+            let speed_load = isRecent ? (listMessages?.[listMessages.length - 1]?.messages[listMessages?.[listMessages.length - 1]?.messages.length - 1]?.message.length * SPEED_REPLAY) : 0;
+            if (speed_load > 0 && this.state.is_show === 1) {
+                
+                this.setState({ is_show: 0 });
+            }
             this.run_typing = setTimeout(() => {
-                if (this.state.is_show === 0) {
+                if (this.state.is_show === 0 && this.state.is_show === 0) {
                     this.setState({ is_show: 1 })
                 }
                 }, speed_load);
@@ -295,7 +304,7 @@ class Home extends React.Component{
                                         return (
                                         <div key={index} className={`user-item ${index === user_index ? "active" : ""}`} onClick={() => this.handleClickUser(index)} >
                                             <div className="user-avatar">
-                                                 <img loadding="lazy" src={item.avatar} alt="avatar"/>
+                                                 <img loading="lazy" src={item.avatar} alt="avatar"/>
                                             </div>
                                             <div className="user-content">
                                                 <p className="user-name">{item.fullname}</p>
