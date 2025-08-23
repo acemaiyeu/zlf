@@ -45,12 +45,13 @@ class MessageLeft extends React.Component {
             <div className="list-message">
                 {messages.map((item, index) => {
                     const isRecent = currentTime - changeDateTextToTime(item.time) < 10000; // 10s
+                    console.log(isRecent)
                     const isLastMessage = index === messages.length - 1;
                     // {console.log("isRecent: " + isRecent + " isLastMessage: " + isLastMessage + " index: " + index + " length: " + messages.length);}
                     // alert("Ishow: " + is_show);
                     return (
                         <>
-                        {(index < messages.length - 1 || is_show === 1 || !isRecent) && (
+                        {(index < messages.length - 1 || is_show === 1) && (
                         <div key={item.time}>
                             {item.message !== "" && (
                                 <div className={`form-message mess-left ${isRecent && isLastMessage ? "typing" : ""}`}>
@@ -71,12 +72,11 @@ class MessageLeft extends React.Component {
     }
 }
 const changeDateTextToTime = (time_text) => {
-    const [timePart, datePart] = time_text.split(" ");
-    const [hours, minutes] = timePart.split(":").map(Number);
-    const [day, month, year] = datePart.split("/").map(Number);
+        const [timePart, datePart] = time_text.split(" ");
+        const [hours, minutes, seconds = 0] = timePart.split(":").map(Number); // thêm giây
+        const [day, month, year] = datePart.split("/").map(Number);
 
-    console.log("Parsed time:", hours, minutes, day, month, year);
-    return new Date(year, month - 1, day, hours, minutes).getTime();
-};
+        return new Date(year, month - 1, day, hours, minutes, seconds).getTime();
+    };
 
 export default MessageLeft;

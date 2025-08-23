@@ -282,16 +282,16 @@ const initState = {
                     {
                         message: "",
                         icon: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmgwNjNhMThhbW8wMDh3dW9hZDkzZjBwaWt5aTRhbnhzazc1dG95diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dsPBfiEEozyXUXShhB/giphy.gif",
-                        time: "11:26 12/08/2025"
+                        time: "11:26:00 12/08/2025"
                     },{
                         message: "Chào anh ạ",
                         icon: "",
-                        time: "23:25 17/08/2025"
+                        time: "23:25:00 17/08/2025"
                     },
                     {
                         message: "Anh đang làm gì vậy?",
                         icon: "",
-                        time: "23:32 21/08/2025"
+                        time: "23:32:00 21/08/2025"
                     }
                 ]
             },
@@ -311,7 +311,7 @@ const initState = {
                     },{
                         message: "Nay làm việc như nào",
                         icon: "",
-                        time: "21:01 22/08/2025"
+                        time: "21:01:00 22/08/2025"
                     }
                 ]
             },
@@ -365,6 +365,16 @@ const reducer = (state = initState, action) => {
           icon: icon ?? "",
           time: getCurrentTime()
       })
+      listUsers[user_index].listMessage.push({
+                type: "!me",
+                messages: [
+                    {
+                        message: "Vâng ạ",
+                        icon: "",
+                        time: getCurrentTime()
+                    }
+                ]
+            })
       n_rand = Math.random();
       return {...state,listUsers, n_rand}
       
@@ -376,12 +386,14 @@ function getCurrentTime() {
 
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0'); // thêm giây
     const day = String(now.getDate()).padStart(2, '0');
     const month = String(now.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
     const year = now.getFullYear();
 
-    return `${hours}:${minutes} ${day}/${month}/${year}`;
+    return `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
 }
+
 
 
 

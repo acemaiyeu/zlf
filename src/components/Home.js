@@ -69,41 +69,51 @@ class Home extends React.Component{
         }
     }   
       componentDidMount(){
+        document.querySelector(".input").focus();
         this.setState({
             listMessages: this.props.listUsers[0].listMessage,
             listStickers: this.props.listStickers
-        })
+        })   
     }
     changeDateTextToTime = (time_text) => {
         const [timePart, datePart] = time_text.split(" ");
-        const [hours, minutes] = timePart.split(":").map(Number);
+        const [hours, minutes, seconds = 0] = timePart.split(":").map(Number); // thêm giây
         const [day, month, year] = datePart.split("/").map(Number);
 
-        console.log("Parsed time:", hours, minutes, day, month, year);
-    return new Date(year, month - 1, day, hours, minutes).getTime();
-};
+        return new Date(year, month - 1, day, hours, minutes, seconds).getTime();
+    };
+
        componentDidUpdate(prevProps) {
-        
-        if (prevProps.n_rand !== this.props.n_rand) {
-                this.setState({
-                    messages: this.props.messages,
-                    listStickers: this.props.listStickers
-                });
-            }
+        let {listMessages} = this.state;
+            if (prevProps.n_rand !== this.props.n_rand) {
+                    this.setState({
+                        messages: this.props.messages,
+                        listStickers: this.props.listStickers
+                    });
+                }
+            clearTimeout(this.run_typing);
+            let currentTime = Date.now();
+            const isRecent = listMessages?.time
+                    ? currentTime - this.changeDateTextToTime(listMessages.time) < 10000
+                    : false;  
+                console.log("CHecccck: ", isRecent, listMessages)
+            let speed_load = isRecent ? (listMessages?.[listMessages.length - 1]?.messages[listMessages?.[listMessages.length - 1]?.messages.length - 1]?.message.length * 500) : 0;
+            this.run_typing = setTimeout(() => {
+                if (this.state.is_show === 0) {
+                    this.setState({ is_show: 1 })
+                }
+                }, speed_load);
         }
         
+          componentWillUnmount() {
+                // khi unmount cũng phải clear luôn
+                if (this.run_typing) {
+                clearTimeout(this.run_typing);
+                }
+            }
 
     render() {
         let { listStickers, show_sticker, active_user, listUsers, user_index, is_show, listMessages} = this.state;
-        let speed_load = (listMessages?.[listMessages.length - 1]?.messages[listMessages?.[listMessages.length - 1]?.messages.length - 1]?.message.length * 500) || 0;
-        setTimeout(() => {
-            let currentTime = Date.now();
-            const isRecent = currentTime - this.changeDateTextToTime(listMessages ? (listMessages[listMessages.length - 1].messages !== "undefined" ? listMessages[listMessages.length - 1].messages[listMessages[listMessages.length - 1].messages.length - 1].time : "") : "") < 10000;
-            this.setState({
-                is_show: 1
-            })
-        }, speed_load)
-        
         return (
             <div className="home-container">
                 <div className="left">
@@ -359,7 +369,7 @@ class Home extends React.Component{
                                                     <i className="bi bi-three-dots" title="Tùy chọn thêm"></i>
                                             </div>
                                             <div className="form-input">
-                                                <input value={this.state.message} type='text' placeholder='Nhập @, tin nhắn tới Châu Đăng Khoa' onChange={(e) => this.messageChange(e)} onKeyDown={(e) => this.messageChange(e)}/>
+                                                <input value={this.state.message} type='text' className="input" placeholder='Nhập @, tin nhắn tới Châu Đăng Khoa' onChange={(e) => this.messageChange(e)} onKeyDown={(e) => this.messageChange(e)}/>
                                                 
                                                 <i className="bi bi-emoji-smile"></i>
                                                 {this.state.message !== "" ? <i className="bi bi-send-fill btn-send" onClick={() => this.sendMessage()}></i> : <i className="bi bi-hand-thumbs-up-fill thumup"></i>}
