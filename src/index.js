@@ -259,7 +259,7 @@ const initState = {
       is_show: true,
     },
   ],
- listEmojis =  [
+ listEmojis: [
             { title: '', value: '😀'},
             { title: '', value: '😃'},
             { title: '', value: '😄'},
