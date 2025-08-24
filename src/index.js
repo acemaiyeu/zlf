@@ -259,98 +259,219 @@ const initState = {
       is_show: true,
     },
   ],
-  listUsers: [
-    {
-      fullname: "Bà xã nhỏ",
-      avatar:
-        "https://play-lh.googleusercontent.com/K7STyDQJpIF-5YON7Df-xZRfYEmr7zZoo0Ui-VF3_EkZq2Q_70G1fW20w0fb4-H86Ns",
-      introduce: "Vì thương mà đến",
-      gender: "female",
-      status: true,
-      birthday: "2000-01-01",
-      number_phone: "0123456789",
-      listMessage: [
-            {
-                type: "me",
-                message: "Xin chào",
-                icon: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmgwNjNhMThhbW8wMDh3dW9hZDkzZjBwaWt5aTRhbnhzazc1dG95diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dsPBfiEEozyXUXShhB/giphy.gif",
-                time: ""
-            },
-            {
-                type: "Thanh",
-                messages: [
-                    {
-                        message: "",
-                        icon: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmgwNjNhMThhbW8wMDh3dW9hZDkzZjBwaWt5aTRhbnhzazc1dG95diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dsPBfiEEozyXUXShhB/giphy.gif",
-                        time: "11:26:00 12/08/2025"
-                    },{
-                        message: "Chào anh ạ",
-                        icon: "",
-                        time: "23:25:00 17/08/2025"
-                    },
-                    {
-                        message: "Anh đang làm gì vậy?",
-                        icon: "",
-                        time: "23:32:00 21/08/2025"
-                    }
-                ]
-            },
-            {
-                type: "me",
-                message: "Đang nhắn tin cho em nè",
-                icon: "",
-                time: ""
-            },
-            {
-                type: "Thanh",
-                messages: [
-                    {
-                        message: "Vâng ạ",
-                        icon: "",
-                        time: "11:26 12/08/2025"
-                    },{
-                        message: "Nay làm việc như nào",
-                        icon: "",
-                        time: "21:01:00 22/08/2025"
-                    }
-                ]
-            },
+ listEmojis =  [
+            { title: '', value: '😀'},
+            { title: '', value: '😃'},
+            { title: '', value: '😄'},
+            { title: '', value: '😁'},
+            { title: '', value: '😆'},
+            { title: '', value: '😅'},
+            { title: '', value: '😂'},
+            { title: '', value: '🤣'},
+            { title: '', value: '☺️'},
+            { title: '', value: '😊'},
+            { title: '', value: '😇'},
+            { title: '', value: '🙂'},
+            { title: '', value: '🙃'},
+            { title: '', value: '😉'},
+            { title: '', value: '😌'},
+            { title: '', value: '😍'},
+            { title: '', value: '🥰'},
+            { title: '', value: '😘'},
+            { title: '', value: '😗'},
+            { title: '', value: '😙'},
+            { title: '', value: '😚'},
+            { title: '', value: '😋'},
+            { title: '', value: '😛'},
+            { title: '', value: '😝'},
+            { title: '', value: '😜'},
+            { title: '', value: '🤪'},
+            { title: '', value: '🤨'},
+            { title: '', value: '🧐'},
+            { title: '', value: '🤓'},
+            { title: '', value: '😎'},
+            { title: '', value: '🤩'},
+            { title: '', value: '🥳'},
+            { title: '', value: '🙂‍↕️'},
+            { title: '', value: '😏'},
+            { title: '', value: '😒'},
+            { title: '', value: '🙂‍↔️'},
+            { title: '', value: '😞'},
+            { title: '', value: '😔'},
+            { title: '', value: '😟'},
+            { title: '', value: '😕'},
+            { title: '', value: '🙁'},
+            { title: '', value: '☹️'},
+            { title: '', value: '😣'},
+            { title: '', value: '😖'},
+            { title: '', value: '😫'},
+            { title: '', value: '😩'},
+            { title: '', value: '🥺'},
+            { title: '', value: '😢'},
+            { title: '', value: '😭'},
+            { title: '', value: '😮‍💨'},
+            { title: '', value: '😤'},
+            { title: '', value: '😠'},
+            { title: '', value: '😡'},
+            { title: '', value: '🤬'},
+            { title: '', value: '🤯'},
+            { title: '', value: '😳'},
+            { title: '', value: '🥵'},
+            { title: '', value: '🥶'},
+            { title: '', value: '😱'},
+            { title: '', value: '😨'},
+            { title: '', value: '😰'},
+            { title: '', value: '😥'},
+            { title: '', value: '😓'},
+            { title: '', value: '🤗'},
+            { title: '', value: '🤔'},
+            { title: '', value: '🤭'},
+            { title: '', value: '🤫'},
+            { title: '', value: '🤥'},
+            { title: '', value: '😶'},
+            { title: '', value: '😶‍🌫️'},
+            { title: '', value: '😐'},
+            { title: '', value: '😑'},
+            { title: '', value: '😬'},
+            { title: '', value: '🫨'},
+            { title: '', value: '🫠'},
+            { title: '', value: '🙄'},
+            { title: '', value: '😯'},
+            { title: '', value: '😦'},
+            { title: '', value: '😧'},
+            { title: '', value: '😮'},
+            { title: '', value: '😲'},
+            { title: '', value: '🥱'},
+            { title: '', value: '😴'},
+            { title: '', value: '🤤'},
+            { title: '', value: '😪'},
+            { title: '', value: '😵'},
+            { title: '', value: '😵‍💫'},
+            { title: '', value: '🤐'},
+            { title: '', value: '🥴'},
+            { title: '', value: '🤢'},
+            { title: '', value: '🤮'},
+            { title: '', value: '🤧'},
+            { title: '', value: '😷'},
+            { title: '', value: '🤒'},
+            { title: '', value: '🤕'},
+            { title: '', value: '🤑'},
+            { title: '', value: '🤠'},
+            { title: '', value: '😈'},
+            { title: '', value: '👿'},
+            { title: '', value: '👹'},
+            { title: '', value: '👺'},
+            { title: '', value: '🤡'},
+            { title: '', value: '💩'},
+            { title: '', value: '👻'},
+            { title: '', value: '💀'},
+            { title: '', value: '☠️'},
+            { title: '', value: '👽'},
+            { title: '', value: '👾'},
+            { title: '', value: '🤖'},
+            { title: '', value: '🎃'},
+            { title: '', value: '😺'},
+            { title: '', value: '😸'},
+            { title: '', value: '😹'},
+            { title: '', value: '😻'},
+            { title: '', value: '😼'},
+            { title: '', value: '😽'},
+            { title: '', value: '🙀'},
+            { title: '', value: '😿'},
+            { title: '', value: '😾'}
+        ],
+      listUsers: [
+        {
+          fullname: "Bà xã nhỏ",
+          avatar:
+            "https://play-lh.googleusercontent.com/K7STyDQJpIF-5YON7Df-xZRfYEmr7zZoo0Ui-VF3_EkZq2Q_70G1fW20w0fb4-H86Ns",
+          introduce: "Vì thương mà đến",
+          gender: "female",
+          status: true,
+          birthday: "2000-01-01",
+          number_phone: "0123456789",
+          listMessage: [
+                {
+                    type: "me",
+                    message: "Xin chào",
+                    icon: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmgwNjNhMThhbW8wMDh3dW9hZDkzZjBwaWt5aTRhbnhzazc1dG95diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dsPBfiEEozyXUXShhB/giphy.gif",
+                    time: ""
+                },
+                {
+                    type: "Thanh",
+                    messages: [
+                        {
+                            message: "",
+                            icon: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmgwNjNhMThhbW8wMDh3dW9hZDkzZjBwaWt5aTRhbnhzazc1dG95diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dsPBfiEEozyXUXShhB/giphy.gif",
+                            time: "11:26:00 12/08/2025"
+                        },{
+                            message: "Chào anh ạ",
+                            icon: "",
+                            time: "23:25:00 17/08/2025"
+                        },
+                        {
+                            message: "Anh đang làm gì vậy?",
+                            icon: "",
+                            time: "23:32:00 21/08/2025"
+                        }
+                    ]
+                },
+                {
+                    type: "me",
+                    message: "Đang nhắn tin cho em nè",
+                    icon: "",
+                    time: ""
+                },
+                {
+                    type: "Thanh",
+                    messages: [
+                        {
+                            message: "Vâng ạ",
+                            icon: "",
+                            time: "11:26 12/08/2025"
+                        },{
+                            message: "Nay làm việc như nào",
+                            icon: "",
+                            time: "21:01:00 22/08/2025"
+                        }
+                    ]
+                },
+          ],
+        },
+        {
+          fullname: "Bạn gái 1",
+          avatar: "https://picsum.photos/seed/picsum/200/300",
+          introduce: "Vì thương mà đến",
+          gender: "female",
+          status: true,
+          birthday: "2000-01-01",
+          number_phone: "0123456789",
+          listContents: [],
+        },
+        {
+          fullname: "Bạn gái 2",
+          avatar: "https://picsum.photos/200/300",
+          introduce: "Vì thương mà đến",
+          gender: "female",
+          status: false,
+          birthday: "2000-01-01",
+          number_phone: "0123456789",
+          listContents: [],
+        },
       ],
-    },
-    {
-      fullname: "Bạn gái 1",
-      avatar: "https://picsum.photos/seed/picsum/200/300",
-      introduce: "Vì thương mà đến",
-      gender: "female",
-      status: true,
-      birthday: "2000-01-01",
-      number_phone: "0123456789",
-      listContents: [],
-    },
-    {
-      fullname: "Bạn gái 2",
-      avatar: "https://picsum.photos/200/300",
-      introduce: "Vì thương mà đến",
-      gender: "female",
-      status: false,
-      birthday: "2000-01-01",
-      number_phone: "0123456789",
-      listContents: [],
-    },
-  ],
-  myUser: {
-    fullname: "Nguyễn Thành Huy",
-    avatar:
-      "https://scontent.fsgn5-12.fna.fbcdn.net/v/t39.30808-1/469530792_3499704730333197_6202666659628314099_n.jpg?stp=c12.0.558.562a_dst-jpg_s200x200_tt6&_nc_cat=103&ccb=1-7&_nc_sid=1d2534&_nc_ohc=96TSigzQTiYQ7kNvwH1_iy3&_nc_oc=AdknzprE48oWynTfeRH_1vV1ELsOfewXxvg4MZQ61SmI0fYhjzqWynvdwXEyIpSVwojsacq21gqbcLUV8o7iJxpK&_nc_zt=24&_nc_ht=scontent.fsgn5-12.fna&_nc_gid=vX5HD1B11IGHF1k1qt64Uw&oh=00_AfO6De6EiiwzRl23UfSSIIfT319gsGIDY68iyTJD8IRuGQ&oe=6862EB65",
-    introduce: "Vì thương mà đến",
-    gender: "female",
-    status: "online",
-    birthday: "2000-01-01",
-    number_phone: "0123456789",
-  }
-  ,
-  n_rand: -1
-}
+      myUser: {
+        fullname: "Nguyễn Thành Huy",
+        avatar:
+          "https://scontent.fsgn5-12.fna.fbcdn.net/v/t39.30808-1/469530792_3499704730333197_6202666659628314099_n.jpg?stp=c12.0.558.562a_dst-jpg_s200x200_tt6&_nc_cat=103&ccb=1-7&_nc_sid=1d2534&_nc_ohc=96TSigzQTiYQ7kNvwH1_iy3&_nc_oc=AdknzprE48oWynTfeRH_1vV1ELsOfewXxvg4MZQ61SmI0fYhjzqWynvdwXEyIpSVwojsacq21gqbcLUV8o7iJxpK&_nc_zt=24&_nc_ht=scontent.fsgn5-12.fna&_nc_gid=vX5HD1B11IGHF1k1qt64Uw&oh=00_AfO6De6EiiwzRl23UfSSIIfT319gsGIDY68iyTJD8IRuGQ&oe=6862EB65",
+        introduce: "Vì thương mà đến",
+        gender: "female",
+        status: "online",
+        birthday: "2000-01-01",
+        number_phone: "0123456789",
+      }
+      ,
+      n_rand: -1
+    }
 // Reducer mẫu
 const reducer = (state = initState, action) => {
   switch (action.type) {
