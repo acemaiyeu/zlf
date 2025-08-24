@@ -395,7 +395,8 @@ const initState = {
                     type: "me",
                     message: "Xin chào",
                     icon: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmgwNjNhMThhbW8wMDh3dW9hZDkzZjBwaWt5aTRhbnhzazc1dG95diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dsPBfiEEozyXUXShhB/giphy.gif",
-                    time: ""
+                    time: "",
+                    // emoji: "",
                 },
                 {
                     type: "Thanh",
@@ -407,11 +408,13 @@ const initState = {
                         },{
                             message: "Chào anh ạ",
                             icon: "",
+                            // emoji: "",
                             time: "23:25:00 17/08/2025"
                         },
                         {
                             message: "Anh đang làm gì vậy?",
                             icon: "",
+                            emoji: "",
                             time: "23:32:00 21/08/2025"
                         }
                     ]
@@ -420,6 +423,7 @@ const initState = {
                     type: "me",
                     message: "Đang nhắn tin cho em nè",
                     icon: "",
+                    // emoji: "",
                     time: ""
                 },
                 {
@@ -428,14 +432,31 @@ const initState = {
                         {
                             message: "Vâng ạ",
                             icon: "",
+                            // emoji: "",
                             time: "11:26 12/08/2025"
                         },{
                             message: "Nay làm việc như nào",
                             icon: "",
+                            // emoji: "",
                             time: "21:01:00 22/08/2025"
                         }
                     ]
                 },
+                {
+                    type: "me",
+                    message: "Dạ ổn ạ",
+                    messages: [
+                      {
+                          message: "Anh thì sao",
+                          icon: "",
+                          // emoji: "",
+                          time: "21:05:00 22/08/2025"
+                      }
+                    ],
+                    icon: "",
+                    emoji: "🥰",
+                    time: ""
+                }
           ],
         },
         {
@@ -477,13 +498,14 @@ const reducer = (state = initState, action) => {
   switch (action.type) {
     case 'INCREMENT': return { count: state.count + 1 }
     case 'SEND_MESSAGE': 
-      let { user_index, message, icon}  = action.payload;
+      let { user_index, message, icon, emoji}  = action.payload;
       let { listUsers, n_rand } = state;
       // console.log(listUsers[user_index].listMessage.length)
       listUsers[user_index].listMessage.push({
           type: "me",
           message: message ?? "",
           icon: icon ?? "",
+          emoji: emoji ?? "",
           time: getCurrentTime()
       })
       listUsers[user_index].listMessage.push({

@@ -49,6 +49,11 @@ class Message extends React.Component {
                                     {item.icon !== "" && 
                                         <img className="icon-message mess-right" src={item.icon} alt="icon"/>
                                     }
+                                    {item.emoji !== "" && 
+                                        <div className="form-message mess-right">
+                                            <p style={{fontSize: "30px"}}>{item.emoji}</p>
+                                        </div>  
+                                    }
                                 </div> 
                             }
                             {item.type !== "me" && 

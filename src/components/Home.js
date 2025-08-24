@@ -18,6 +18,7 @@ class Home extends React.Component{
         listUsers: this.props.listUsers,
         n_rand: 0,
         listStickers: [],
+        listEmojis: [],
         show_sticker: false,
         is_show: 0
     }
@@ -29,6 +30,13 @@ class Home extends React.Component{
         })
         this.setState({
             message: ""
+        })
+        document.querySelector(".input").focus();
+    }
+    sendEmoji= (text) => {
+        this.props.sendMessage({
+            user_index: this.state.user_index,
+            emoji: text
         })
         document.querySelector(".input").focus();
     }
@@ -77,6 +85,7 @@ class Home extends React.Component{
         this.setState({
             listMessages: this.props.listUsers[0].listMessage,
             listStickers: this.props.listStickers,
+            listEmojis: this.props.listEmojis,
             active_user: {
                 name: this.props.listUsers[0].fullname,
                 avatar: this.props.listUsers[0].avatar
@@ -92,7 +101,9 @@ class Home extends React.Component{
     };
 
        componentDidUpdate(prevProps) {
+
         let {listMessages} = this.state;
+        console.log("listMessages", listMessages);
             if (prevProps.n_rand !== this.props.n_rand) {
                     this.setState({
                         messages: this.props.messages,
@@ -127,7 +138,7 @@ class Home extends React.Component{
             }
 
     render() {
-        let { listStickers, show_sticker, active_user, listUsers, user_index, is_show, listMessages} = this.state;
+        let { listStickers, listEmojis, show_sticker, show_emoji, active_user, listUsers, user_index, is_show, listMessages} = this.state;
         return (
             <div className="home-container">
                 <div className="left">
@@ -364,12 +375,31 @@ class Home extends React.Component{
                                     }
                                     
                                     {show_sticker && 
-                                            <div className="header-input-modal">
-                                                {listStickers && listStickers.length > 0 && listStickers.map((item) => {
-                                                    return (<img onClick={() => this.sendSticker(item.link)}  src={item.link} alt="sticker/emochi"/>)
-                                                })}
-                                                
-                                            </div>
+                                            <div className={`header-input-modal ${show_emoji ? 'emoji-box' : ''}`} >
+                                                {show_emoji && listEmojis && listEmojis.length > 0 ? (
+                                                    listEmojis.map((item, index) => (
+                                                    <p 
+                                                        key={index} 
+                                                        onClick={() => this.sendEmoji(item.value)} 
+                                                        className="emoji-item"
+                                                    >
+                                                        {item.value}
+                                                    </p>
+                                                    ))
+                                                ) : (
+                                                    listStickers && listStickers.length > 0 &&
+                                                    listStickers.map((item, index) => (
+                                                    <img 
+                                                        key={index} 
+                                                        onClick={() => this.sendSticker(item.link)}  
+                                                        src={item.link} 
+                                                        alt="sticker/emochi" 
+                                                        className="sticker-item"
+                                                    />
+                                                    ))
+                                                )}
+                                                </div>
+
         }
                                             <div className="header-input">
                                                     <i className="bi bi-emoji-grin" title="Gửi sticker"></i>
