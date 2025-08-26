@@ -25,7 +25,7 @@ class Home extends React.Component{
     }
 
     sendMessage = async () => {
-        const reply = await chatWithGPT(this.state.message);
+        // const reply = await chatWithGPT(this.state.message);
         this.props.sendMessage({
             user_index: this.state.user_index,
             message: this.state.message, 
@@ -110,7 +110,8 @@ class Home extends React.Component{
             if (prevProps.n_rand !== this.props.n_rand) {
                     this.setState({
                         messages: this.props.messages,
-                        listStickers: this.props.listStickers
+                        listStickers: this.props.listStickers,
+                        listMessages: this.props.listUsers[this.state.user_index].listMessage,
                     });
                 }
             clearTimeout(this.run_typing);

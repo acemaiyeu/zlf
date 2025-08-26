@@ -13,6 +13,7 @@ class Message extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        // console.log("Component did update", this.props.messages, prevProps.messages);
         if (prevProps.messages !== this.props.messages) {
             this.setState({
                 messages: this.props.messages,
@@ -26,7 +27,7 @@ class Message extends React.Component {
     }
 
     scrollToBottom = () => {
-        if (this.messagesEndRef.current) {
+        if (this.messagesEndRef.current && this.state.messages.length > 10) {
             this.messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }
@@ -35,7 +36,9 @@ class Message extends React.Component {
         let { messages } = this.state;
         let { is_show } = this.props;
         return (
-            <div className="message-container" style={{overflowY: "auto"}}>
+            <div className="message-container" style={{
+                ...(messages.length >= 10 ? { overflowY: "auto"}: { overflowY: "none"})
+                }}>
                 {messages && messages.length > 0 && messages.map((item, index) => {
                     return (
                         <div key={index}>
@@ -63,7 +66,7 @@ class Message extends React.Component {
                     )
                 })}
                 {/* Thẻ ẩn để làm mốc cuộn xuống */}
-                <div ref={this.messagesEndRef} />
+                <div ref={this.messagesEndRef}/>
             </div>
         )
     }
