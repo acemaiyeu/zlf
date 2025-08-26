@@ -5,6 +5,7 @@ import App from './App'
 import { createStore } from 'redux'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { chatWithGPT } from "./service/openai.js";
 
 
 const initState = {
@@ -451,12 +452,46 @@ const initState = {
                           icon: "",
                           // emoji: "",
                           time: "21:05:00 22/08/2025"
+                      },
+                      {
+                          message: "'",
+                          icon: "",
+                          // emoji: "",
+                          time: "21:05:00 22/08/2025"
+                      },
+                      {
+                          message: "'",
+                          icon: "",
+                          // emoji: "",
+                          time: "21:05:00 22/08/2025"
+                      },
+                      {
+                          message: "'",
+                          icon: "",
+                          // emoji: "",
+                          time: "21:05:00 22/08/2025"
                       }
                     ],
                     icon: "",
                     emoji: "🥰",
                     time: ""
-                }
+                },
+                {
+                    type: "Thanh",
+                    messages: [
+                        {
+                            message: "'",
+                            icon: "",
+                            // emoji: "",
+                            time: "11:26 12/08/2025"
+                        },{
+                            message: "'",
+                            icon: "",
+                            // emoji: "",
+                            time: "21:01:00 22/08/2025"
+                        }
+                    ]
+                },
           ],
         },
         {
@@ -498,9 +533,11 @@ const reducer = (state = initState, action) => {
   switch (action.type) {
     case 'INCREMENT': return { count: state.count + 1 }
     case 'SEND_MESSAGE': 
-      let { user_index, message, icon, emoji}  = action.payload;
+      let { user_index, message, icon, emoji, reply}  = action.payload;
       let { listUsers, n_rand } = state;
-      // console.log(listUsers[user_index].listMessage.length)
+      if (listUsers[user_index].listMessage === undefined) {
+        listUsers[user_index].listMessage = [];
+      }
       listUsers[user_index].listMessage.push({
           type: "me",
           message: message ?? "",
@@ -512,10 +549,11 @@ const reducer = (state = initState, action) => {
                 type: "!me",
                 messages: [
                     {
-                        message: "Vâng ạ",
+                        message: "Đó là được sinh ra trên thế giới này!",
                         icon: "",
                         time: getCurrentTime()
                     }
+                    
                 ]
             })
       n_rand = Math.random();
@@ -540,7 +578,6 @@ function getCurrentTime() {
 
 
 
-
 const store = createStore(reducer)
 
 ReactDOM.render(
@@ -552,3 +589,4 @@ ReactDOM.render(
   document.getElementById('root')
   
 )
+

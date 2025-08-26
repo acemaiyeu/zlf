@@ -6,6 +6,7 @@ import logo_en from '../asset/img/istockphoto-1042208442-612x612.jpg'
 import Message from './Message'
 import {connect} from 'react-redux'
 import { SPEED_REPLAY, TIME_SHOW_TYPING } from '../constants/constants'
+import { chatWithGPT } from '../service/openai.js'
 class Home extends React.Component{
     state = {
         user_index: 0,
@@ -23,15 +24,18 @@ class Home extends React.Component{
         is_show: 0
     }
 
-    sendMessage = () => {
+    sendMessage = async () => {
+        const reply = await chatWithGPT(this.state.message);
         this.props.sendMessage({
             user_index: this.state.user_index,
-            message: this.state.message
+            message: this.state.message, 
+            reply: reply,
         })
         this.setState({
             message: ""
         })
         document.querySelector(".input").focus();
+        
     }
     sendEmoji= (text) => {
         this.props.sendMessage({
@@ -103,7 +107,6 @@ class Home extends React.Component{
        componentDidUpdate(prevProps) {
 
         let {listMessages} = this.state;
-        console.log("listMessages", listMessages);
             if (prevProps.n_rand !== this.props.n_rand) {
                     this.setState({
                         messages: this.props.messages,
@@ -467,7 +470,7 @@ class Home extends React.Component{
                                     </div>
                                     <div className="reminder">
                                         <div className="reminder-icon">
-                                            <img src="https://cdn.creazilla.com/emojis/44982/alarm-clock-emoji-clipart-md.png" alt="reminder-icon" />
+                                            <img src="https://cdn.creazilla.com/emojis/44982/alarm-clock-emoji-clipart-md.png" loading="lazy" alt="reminder-icon" />
                                         </div>
                                         <div className="reminder-title">
                                             Danh sách nhắc hẹn
