@@ -29,7 +29,7 @@ class Home extends React.Component{
         this.props.sendMessage({
             user_index: this.state.user_index,
             message: this.state.message, 
-            reply: reply,
+            // reply: reply,
         })
         this.setState({
             message: ""
@@ -328,7 +328,8 @@ class Home extends React.Component{
                                             </div>
                                             <div className="user-content">
                                                 <p className="user-name">{item.fullname}</p>
-                                                <p className="message">Đr em</p>
+                                                {console.log(item?.listMessage !== undefined ? (item?.listMessage[item?.listMessage.length - 1].messages !== undefined ? item?.listMessage[item?.listMessage.length - 1].messages[item?.listMessage[item?.listMessage.length - 1].messages.length - 1].message : "") : "không có")}
+                                                <p className="message">{item.listMessage !== undefined ? (item?.listMessage[item?.listMessage.length - 1].messages !== undefined ? (item?.listMessage[item?.listMessage.length - 1].messages[item?.listMessage[item?.listMessage.length - 1].messages.length - 1].message ?? "")  : "Không có"}</p>
                                             </div>
                                             <div className="user-more">
                                                 <div className="more-action">
@@ -433,10 +434,10 @@ class Home extends React.Component{
                                 <div className="box-expends-body">
                                     <div className="info-user">
                                         <div className="user-avatar">
-                                            <img src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t39.30808-1/500058654_3999422733706244_5664473045642803434_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeEPw72Yy8CC-O4linvvY_2mIPh9XTMQ5oMg-H1dMxDmg5xI52fSAbYZ_s-62__J2g2cT8N-qWMvh0y5CP0u_SlH&_nc_ohc=lf5lblEu9EQQ7kNvwF4YtBV&_nc_oc=AdkG6UJ4Q62wFrp9loz5sPeoegh21gIiEtJeujIKeHxqJgVpR1cN1ipsAG58KScmjKTv9urzToD_ZGaLclidBvRN&_nc_zt=24&_nc_ht=scontent.fsgn5-5.fna&_nc_gid=L6-NMrePrVFcYrKb_uI6yQ&oh=00_AfWguMdgPfeWcPQiR2u48sT80nKqUzIyzX3SYDm7UjjuRA&oe=689BC096" alt="avatar"/>
+                                            <img src={active_user.avatar ?? "" } alt="avatar"/>
                                         </div>
                                         <div className="user-name">
-                                            <p className="user-username">Châu Đăng Khoa</p> 
+                                            <p className="user-username">{active_user.name ?? ""}</p> 
                                             <div className="edit-username">
                                                 <i className="bi bi-pencil"></i>
                                             </div>

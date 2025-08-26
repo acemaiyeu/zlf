@@ -514,6 +514,16 @@ const initState = {
           number_phone: "0123456789",
           listContents: [],
         },
+        {
+          fullname: "Nam",
+          avatar: "https://picsum.photos/200/300",
+          introduce: "Vì thương mà đến",
+          gender: "female",
+          status: false,
+          birthday: "2000-01-01",
+          number_phone: "0123456789",
+          listContents: [],
+        },
       ],
       myUser: {
         fullname: "Nguyễn Thành Huy",
@@ -530,6 +540,7 @@ const initState = {
     }
 // Reducer mẫu
 const reducer = (state = initState, action) => {
+    state.listUsers = JSON.parse(localStorage.getItem("listUsers")) ?? state.listUsers;
   switch (action.type) {
     case 'INCREMENT': return { count: state.count + 1 }
     case 'SEND_MESSAGE': 
@@ -557,6 +568,7 @@ const reducer = (state = initState, action) => {
                 ]
             })
       n_rand = Math.random();
+      localStorage.setItem("listUsers", JSON.stringify(listUsers));
       return {...state,listUsers, n_rand}
       
     default: return state
