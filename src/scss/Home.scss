@@ -222,13 +222,15 @@ body{
                         .user-avatar{
                             width: 50px;
                             height: 50px;
-                            overflow: hidden;
+                            // overflow: hidden;
                             margin-right: 20px;
                             background-color: #fff;
                             border-radius: 50%;
                             display: flex;
+                            position: relative;
                             img{
                                 width: 100%;
+                                border-radius: 50%;
                             }
                         }
                         .user-content{
@@ -282,12 +284,15 @@ body{
                         .content-avatar{
                             width: 50px;
                             height: 50px;
-                            overflow: hidden;
+                            // overflow: hidden;
                             margin-right: 10px;
-                            border-radius: 50%;
+                            // border-radius: 50%;
                             align-items: center;
+                            position: relative;
                             img{
                                 width: 100%;
+                                border-radius: 50%;
+                                height: 100%;
                             }
                         }
                         .content-body{

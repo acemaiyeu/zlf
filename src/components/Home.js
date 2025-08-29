@@ -7,6 +7,7 @@ import Message from './Message'
 import {connect} from 'react-redux'
 import { SPEED_REPLAY, TIME_SHOW_TYPING } from '../constants/constants'
 import { chatWithGPT } from '../service/openai.js'
+import OnlineComponent from './OnlineComponent.js'
 class Home extends React.Component{
     state = {
         user_index: 0,
@@ -325,11 +326,17 @@ class Home extends React.Component{
                                         <div key={index} className={`user-item ${index === user_index ? "active" : ""}`} onClick={() => this.handleClickUser(index)} >
                                             <div className="user-avatar">
                                                  <img loading="lazy" src={item.avatar} alt="avatar"/>
+                                                 <OnlineComponent/>
                                             </div>
                                             <div className="user-content">
                                                 <p className="user-name">{item.fullname}</p>
-                                                {console.log(item?.listMessage !== undefined ? (item?.listMessage[item?.listMessage.length - 1].messages !== undefined ? item?.listMessage[item?.listMessage.length - 1].messages[item?.listMessage[item?.listMessage.length - 1].messages.length - 1].message : "") : "không có")}
-                                                <p className="message">{item.listMessage !== undefined ? (item?.listMessage[item?.listMessage.length - 1].messages !== undefined ? (item?.listMessage[item?.listMessage.length - 1].messages[item?.listMessage[item?.listMessage.length - 1].messages.length - 1].message ?? "")  : "Không có"}</p>
+                                                {/* {console.log(item?.listMessage !== undefined ? (item?.listMessage[item?.listMessage.length - 1].messages !== undefined ? item?.listMessage[item?.listMessage.length - 1].messages[item?.listMessage[item?.listMessage.length - 1].messages.length - 1].message : "") : "không có")} */}
+                                                <p className="message">
+                                                    {item.listMessage !== undefined ? 
+                                                        ((item?.listMessage[item?.listMessage.length - 1].messages !== undefined) ? 
+                                                            (item?.listMessage[item?.listMessage.length - 1].messages[item?.listMessage[item?.listMessage.length - 1].messages.length - 1].message ?? "") 
+                                                            : "")  
+                                                    : ""}</p>
                                             </div>
                                             <div className="user-more">
                                                 <div className="more-action">
@@ -347,6 +354,7 @@ class Home extends React.Component{
                                     <div className="content-left">
                                         <div className="content-avatar">
                                             <img src={active_user?.avatar} alt="avatar"/>
+                                            <OnlineComponent/>
                                         </div>
                                         <div className="content-body">
                                             <div className="content-username">{active_user?.name}</div>

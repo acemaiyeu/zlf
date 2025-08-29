@@ -476,22 +476,22 @@ const initState = {
                     emoji: "🥰",
                     time: ""
                 },
-                {
-                    type: "Thanh",
-                    messages: [
-                        {
-                            message: "'",
-                            icon: "",
-                            // emoji: "",
-                            time: "11:26 12/08/2025"
-                        },{
-                            message: "'",
-                            icon: "",
-                            // emoji: "",
-                            time: "21:01:00 22/08/2025"
-                        }
-                    ]
-                },
+                // {
+                //     type: "Thanh",
+                //     messages: [
+                //         {
+                //             message: "'",
+                //             icon: "",
+                //             // emoji: "",
+                //             time: "11:26 12/08/2025"
+                //         },{
+                //             message: "'",
+                //             icon: "",
+                //             // emoji: "",
+                //             time: "21:01:00 22/08/2025"
+                //         }
+                //     ]
+                // },
           ],
         },
         {
