@@ -385,7 +385,8 @@ const initState = {
         {
           fullname: "Bà xã nhỏ",
           avatar:
-            "https://play-lh.googleusercontent.com/K7STyDQJpIF-5YON7Df-xZRfYEmr7zZoo0Ui-VF3_EkZq2Q_70G1fW20w0fb4-H86Ns",
+            // "https://play-lh.googleusercontent.com/K7STyDQJpIF-5YON7Df-xZRfYEmr7zZoo0Ui-VF3_EkZq2Q_70G1fW20w0fb4-H86Ns",
+            "https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/541157755_3736336596670008_3380235302931190905_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=jTZTLfwdVYkQ7kNvwGuwk9C&_nc_oc=AdnRH-_M6EhLxO2GHenMmzhawvjn8EHLhzsfgp58J6sIWH9AR-mp1owtStJB2Jot98o4XAeJvNxtpMXuToL6ge3H&_nc_zt=23&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=ypKFf1dvAXvYEjQakdLu1w&oh=00_AfaYxEL7quhQ38TSLSDbYau3iuSnYaBMf1PmRjX_tvwFZg&oe=68BF9B2E",
           introduce: "Vì thương mà đến",
           gender: "female",
           status: true,
@@ -493,37 +494,38 @@ const initState = {
                 //     ]
                 // },
           ],
+           ai_chat: false
         },
-        {
-          fullname: "Bạn gái 1",
-          avatar: "https://picsum.photos/seed/picsum/200/300",
-          introduce: "Vì thương mà đến",
-          gender: "female",
-          status: true,
-          birthday: "2000-01-01",
-          number_phone: "0123456789",
-          listContents: [],
-        },
-        {
-          fullname: "Bạn gái 2",
-          avatar: "https://picsum.photos/200/300",
-          introduce: "Vì thương mà đến",
-          gender: "female",
-          status: false,
-          birthday: "2000-01-01",
-          number_phone: "0123456789",
-          listContents: [],
-        },
-        {
-          fullname: "Nam",
-          avatar: "https://picsum.photos/200/300",
-          introduce: "Vì thương mà đến",
-          gender: "female",
-          status: false,
-          birthday: "2000-01-01",
-          number_phone: "0123456789",
-          listContents: [],
-        },
+        // {
+        //   fullname: "Bạn gái 1",
+        //   avatar: "https://picsum.photos/seed/picsum/200/300",
+        //   introduce: "Vì thương mà đến",
+        //   gender: "female",
+        //   status: true,
+        //   birthday: "2000-01-01",
+        //   number_phone: "0123456789",
+        //   listContents: [],
+        // },
+        // {
+        //   fullname: "Bạn gái 2",
+        //   avatar: "https://picsum.photos/200/300",
+        //   introduce: "Vì thương mà đến",
+        //   gender: "female",
+        //   status: false,
+        //   birthday: "2000-01-01",
+        //   number_phone: "0123456789",
+        //   listContents: [],
+        // },
+        // {
+        //   fullname: "Nam",
+        //   avatar: "https://picsum.photos/200/300",
+        //   introduce: "Vì thương mà đến",
+        //   gender: "female",
+        //   status: false,
+        //   birthday: "2000-01-01",
+        //   number_phone: "0123456789",
+        //   listContents: [],
+        // },
       ],
       myUser: {
         fullname: "Nguyễn Thành Huy",
@@ -536,10 +538,19 @@ const initState = {
         number_phone: "0123456789",
       }
       ,
-      n_rand: -1
+      n_rand: -1,
+      list_data_local: [
+      {
+        title: "listUsers",
+      },
+      {
+        title: "Import Data for AI customer",
+      }
+    ]
     }
+
 // Reducer mẫu
-const reducer = (state = initState, action) => {
+const reducer =  (state = initState, action) => {
     state.listUsers = JSON.parse(localStorage.getItem("listUsers")) ?? state.listUsers;
   switch (action.type) {
     case 'INCREMENT': return { count: state.count + 1 }
@@ -560,7 +571,9 @@ const reducer = (state = initState, action) => {
                 type: "!me",
                 messages: [
                     {
-                        message: "Đó là được sinh ra trên thế giới này!",
+                        message: 
+                        listUsers_s[user_index].ai_chat ? 
+                        reply : "",
                         icon: "",
                         time: getCurrentTime()
                     }
@@ -570,7 +583,10 @@ const reducer = (state = initState, action) => {
       n_rand = Math.random();
       localStorage.setItem("listUsers", JSON.stringify(listUsers));
       return {...state,listUsers, n_rand}
-      
+      case 'CHANGE_STATUS_AI_CHAT':
+      let listUsers_s = state.listUsers;
+      listUsers_s[action.payload].ai_chat =  !listUsers_s[action.payload].ai_chat;
+      return {...state,listUsers: listUsers_s, n_rand: Math.random()}
     default: return state
   }
 }
@@ -585,6 +601,29 @@ function getCurrentTime() {
     const year = now.getFullYear();
 
     return `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
+}
+function replyByData(question, listDefaultQA = initState.listDefaultQA ?? []) {
+  let answer = ''
+  let letsion = "";
+  let check = [];
+  for (let i = 0; i < listDefaultQA.length; i++) {
+        for(let j  = 0; j < listDefaultQA[i].question.length; j++) {
+             if (listDefaultQA[i].question[j] !== " "){
+                letsion += listDefaultQA[i].question[j];
+             } 
+             if (listDefaultQA[i].question[j] === " "){
+                if (question.includes(letsion)) {
+                let o = {
+                  i: i,
+                  total: 1 
+                }
+                check.push(o);
+                letsion = "";
+             } 
+        }
+  }
+}
+console.log("check", check);
 }
 
 

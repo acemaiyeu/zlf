@@ -4,7 +4,7 @@ services:
   react-app:
     build:
       context: .       # thư mục hiện tại (nơi có Dockerfile)
-      dockerfile: Dockerfile
+      dockerfile: Window.Dockerfile
     container_name: react-app
     ports:
       - "3000:80"      # map cổng 80 trong container ra cổng 3000 ngoài host

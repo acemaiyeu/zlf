@@ -253,9 +253,21 @@ body{
                            }
                            &>.more-action{
                                 width: 15px;
+                                position: relative;
+                                 &:hover .more-action-modal{
+                                    display: block;
+                                }
                                 img{
                                     width: 100%;
                                 }
+                            .more-action-modal{
+                                width: 150px;
+                                min-height: 50px;
+                                background-color: #fff;
+                                font-size: 14px;
+                                display: none;
+                                position: absolute;
+                            }
                            }
                         }
                     }

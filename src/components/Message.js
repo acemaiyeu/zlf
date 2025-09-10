@@ -1,6 +1,7 @@
 import React from "react";
 import MessageLeft from "./MessageLeft";
 import '../scss/Message.scss';
+import ImportExcel from "./ExcelCompenent";
 
 class Message extends React.Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class Message extends React.Component {
     }
 
     scrollToBottom = () => {
-        if (this.messagesEndRef.current && this.state.messages.length > 10) {
+        if (this.messagesEndRef.current && this.state.messages.length >= 3) {
             this.messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }
@@ -67,6 +68,7 @@ class Message extends React.Component {
                 })}
                 {/* Thẻ ẩn để làm mốc cuộn xuống */}
                 <div ref={this.messagesEndRef}/>
+                {/* <ImportExcel /> */}
             </div>
         )
     }

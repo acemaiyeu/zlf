@@ -8,6 +8,7 @@ import {connect} from 'react-redux'
 import { SPEED_REPLAY, TIME_SHOW_TYPING } from '../constants/constants'
 import { chatWithGPT } from '../service/openai.js'
 import OnlineComponent from './OnlineComponent.js'
+import  ImportExcel from './ExcelCompenent.js'
 class Home extends React.Component{
     state = {
         user_index: 0,
@@ -22,15 +23,15 @@ class Home extends React.Component{
         listStickers: [],
         listEmojis: [],
         show_sticker: false,
-        is_show: 0
+        is_show: 0,
+        list_data_local: []
     }
 
     sendMessage = async () => {
-        // const reply = await chatWithGPT(this.state.message);
         this.props.sendMessage({
             user_index: this.state.user_index,
+            username: this.state.active_user.name,
             message: this.state.message, 
-            // reply: reply,
         })
         this.setState({
             message: ""
@@ -87,7 +88,9 @@ class Home extends React.Component{
     }   
       componentDidMount(){
         document.querySelector(".input").focus();
+        console.log(this.props.listUsers)
         this.setState({
+            
             listMessages: this.props.listUsers[0].listMessage,
             listStickers: this.props.listStickers,
             listEmojis: this.props.listEmojis,
@@ -95,7 +98,12 @@ class Home extends React.Component{
                 name: this.props.listUsers[0].fullname,
                 avatar: this.props.listUsers[0].avatar
             },
+            list_data_local: this.props.list_data_local
         })   
+    }
+    changeStatusAIChat = () => {
+        this.props.changeStatusAIChat(this.state.user_index)
+    
     }
     changeDateTextToTime = (time_text) => {
         const [timePart, datePart] = time_text.split(" ");
@@ -141,9 +149,13 @@ class Home extends React.Component{
                 clearTimeout(this.run_typing);
                 }
             }
-
+        clearDataLocal = (name) => {
+            localStorage.removeItem(name);
+            alert("Đã xóa dữ liệu temp. Vui lòng tải lại trang!");
+            window.location.reload();
+        }
     render() {
-        let { listStickers, listEmojis, show_sticker, show_emoji, active_user, listUsers, user_index, is_show, listMessages} = this.state;
+        let { listStickers, listEmojis, show_sticker, show_emoji, active_user, listUsers, user_index, is_show, list_data_local} = this.state;
         return (
             <div className="home-container">
                 <div className="left">
@@ -219,6 +231,23 @@ class Home extends React.Component{
                                                                             <div className="modal-expends"></div>
                                                                     </div>
                                                                     <hr style={{ width: "90%"}}/>
+                                                                    <div className="modal-item" >
+                                                                            <div className="modal-title">Xóa dữ liệu temp
+                                                                                 {list_data_local && list_data_local.length > 0 && (<div className="modal-orther">
+                                                                                    {list_data_local.map((item) => {
+                                                                                        return ( 
+                                                                                        <div className="modal-item" onClick={() => this.clearDataLocal(item.title)}>
+                                                                                            <div className="modal-title">Xóa dữ liệu {item.title}</div>
+                                                                                            <div className="modal-expends"></div>
+                                                                                        </div>)})}
+                                                                                    </div>)
+                                                                                 }
+                                                                                   
+                                                                                 
+                                                                            </div>
+                                                                            <div className="modal-expends">
+                                                                            </div>
+                                                                    </div>
                                                                     <div className="modal-item">
                                                                             <div className="modal-title">Quản lý File</div>
                                                                             <div className="modal-expends">
@@ -341,6 +370,11 @@ class Home extends React.Component{
                                             <div className="user-more">
                                                 <div className="more-action">
                                                     <img src="https://cdn-icons-png.flaticon.com/512/16/16073.png" alt="dot"/>
+                                                    <div className="more-action-modal">
+                                                        <div className='more-action-item'>
+                                                            {/* <ImportExcel user={user_index}/> */}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 {/* <p>4 giờ</p> */}
                                             </div>
@@ -592,7 +626,35 @@ class Home extends React.Component{
                                                 <i className="bi bi-toggle-off"></i>
                                                 {/* <i className="bi bi-toggle-on"></i> */}
                                             </div>
+                                           
+                                           
                                         </div>
+                                        <div className="security-item">
+                                                <div className="security-item-icon">
+                                                    <i className="bi bi-eye-slash"></i>
+                                                     
+                                                </div>
+                                             <div className="security-item-title">
+                                               
+                                                <div className="security-item-title">
+                                                 {/* <ImportExcel user={user_index}/> */}
+                                                 <p>Import </p>
+                                                </div>
+                                            </div>  
+                                        </div> 
+                                        <div className="security-item" onClick={() => this.changeStatusAIChat()}>
+                                                <div className="security-item-icon">
+                                                    <i className="bi bi-eye-slash"></i>
+                                                </div>
+                                                <div className="security-item-title">
+                                                    <div className="security-item-title">
+                                                    <p>Chat với AI</p>
+                                                    {/* {!listUsers[user_index]?.ai_chat ? <i className="bi bi-toggle-off"></i> : <i className="bi bi-toggle-on"></i>} */}
+                                                    
+                                                {/*  */}
+                                                    </div>
+                                                </div>  
+                                        </div> 
                                         </div>
                                     </div>
                                     <div className="distroy">
@@ -628,6 +690,10 @@ const mapDispatchToProps = (dispatch) => ({
      sendSticker: (data) => dispatch({
         type: "SEND_MESSAGE",
         payload: data
-    })
+    }),
+    changeStatusAIChat: (data) => dispatch({
+        type: "CHANGE_STATUS_AI_CHAT",
+        payload: data
+    }),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
