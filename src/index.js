@@ -655,7 +655,6 @@ function replyByData(question) {
             .sort((a, b) => b.count - a.count);
             answer = listDefaultQA[result[0].i].answer[Math.floor(Math.random() * listDefaultQA[result[0].i].answer.length)];
         }
-        alert(answer)
 return answer;
 }
 
