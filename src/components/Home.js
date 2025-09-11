@@ -234,9 +234,9 @@ class Home extends React.Component{
                                                                     <div className="modal-item" >
                                                                             <div className="modal-title">Xóa dữ liệu temp
                                                                                  {list_data_local && list_data_local.length > 0 && (<div className="modal-orther">
-                                                                                    {list_data_local.map((item) => {
+                                                                                    {list_data_local.map((item, ind) => {
                                                                                         return ( 
-                                                                                        <div className="modal-item" onClick={() => this.clearDataLocal(item.title)}>
+                                                                                        <div key={ind} className="modal-item" onClick={() => this.clearDataLocal(item.title)}>
                                                                                             <div className="modal-title">Xóa dữ liệu {item.title}</div>
                                                                                             <div className="modal-expends"></div>
                                                                                         </div>)})}

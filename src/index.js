@@ -575,7 +575,7 @@ const reducer =  (state = initState, action) => {
                     {
                         message: 
                         listUsers[user_index].ai_chat ? 
-                        reply : "",
+                        reply : replyByData(message),
                         icon: "",
                         time: getCurrentTime()
                     }
@@ -585,7 +585,7 @@ const reducer =  (state = initState, action) => {
       n_rand = Math.random();
       localStorage.setItem("listUsers", JSON.stringify(listUsers));
       console.log("listUsers after send message", state);
-       alert("SEND_MESSAGE")
+      //  alert("SEND_MESSAGE")
       return {...state,listUsers, n_rand}
       case 'CHANGE_STATUS_AI_CHAT':
       let listUsers_s = state.listUsers;
@@ -606,28 +606,57 @@ function getCurrentTime() {
 
     return `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
 }
-function replyByData(question, listDefaultQA = initState.listDefaultQA ?? []) {
+function replyByData(question) {
   let answer = ''
+  let listDefaultQA = initState.listDefaultQA ?? [];
   let letsion = "";
   let check = [];
-  for (let i = 0; i < listDefaultQA.length; i++) {
-        for(let j  = 0; j < listDefaultQA[i].question.length; j++) {
-             if (listDefaultQA[i].question[j] !== " "){
-                letsion += listDefaultQA[i].question[j];
-             } 
-             if (listDefaultQA[i].question[j] === " "){
-                if (question.includes(letsion)) {
-                let o = {
-                  i: i,
-                  total: 1 
+  let question_space = question.trim().length - question.trim().replaceAll(" ","").length;
+  let question_space_index = 0;
+        for(let j  = 0; j < question.length; j++) {
+             if (question[j] !== " "){
+                letsion += question[j];
+             }
+             else{
+              question_space_index++;
+              if (question_space_index === question_space){
+                let last_word = (question.slice(j+1 ).trim());
+                for (let i = 0; i < listDefaultQA.length; i++) {
+                    console.log(listDefaultQA[i].question,(last_word))
+                    if (listDefaultQA[i].question.split(" ").includes(last_word)) {
+                      let o = {
+                        i: i,
+                      }
+                      check.push(o);         
+                    }
                 }
-                check.push(o);
-                letsion = "";
-             } 
+              }else{
+                for (let i = 0; i < listDefaultQA.length; i++) {
+                  if (listDefaultQA[i].question.split(" ").includes(letsion)) {
+                        let o = {
+                          i: i,
+                        }
+                        check.push(o);         
+                    }
+                }
+              }
+              letsion = "";
+            }
         }
-  }
-}
-console.log("check", check);
+        if (check.length > 0){
+          let countMap = {};
+          for (let item of check) {
+            countMap[item.i] = (countMap[item.i] || 0) + 1;
+          }
+
+          // B2: Biến thành mảng [i, count] và sắp xếp
+          let result = Object.entries(countMap)
+            .map(([i, count]) => ({ i: Number(i), count }))
+            .sort((a, b) => b.count - a.count);
+            answer = listDefaultQA[result[0].i].answer[Math.floor(Math.random() * listDefaultQA[result[0].i].answer.length)];
+        }
+        alert(answer)
+return answer;
 }
 
 
