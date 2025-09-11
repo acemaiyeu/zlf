@@ -555,8 +555,10 @@ const reducer =  (state = initState, action) => {
   switch (action.type) {
     case 'INCREMENT': return { count: state.count + 1 }
     case 'SEND_MESSAGE': 
+   
       let { user_index, message, icon, emoji, reply}  = action.payload;
       let { listUsers, n_rand } = state;
+      
       if (listUsers[user_index].listMessage === undefined) {
         listUsers[user_index].listMessage = [];
       }
@@ -572,7 +574,7 @@ const reducer =  (state = initState, action) => {
                 messages: [
                     {
                         message: 
-                        listUsers_s[user_index].ai_chat ? 
+                        listUsers[user_index].ai_chat ? 
                         reply : "",
                         icon: "",
                         time: getCurrentTime()
@@ -582,6 +584,8 @@ const reducer =  (state = initState, action) => {
             })
       n_rand = Math.random();
       localStorage.setItem("listUsers", JSON.stringify(listUsers));
+      console.log("listUsers after send message", state);
+       alert("SEND_MESSAGE")
       return {...state,listUsers, n_rand}
       case 'CHANGE_STATUS_AI_CHAT':
       let listUsers_s = state.listUsers;
