@@ -386,7 +386,7 @@ const initState = {
           fullname: "Bà xã nhỏ",
           avatar:
             // "https://play-lh.googleusercontent.com/K7STyDQJpIF-5YON7Df-xZRfYEmr7zZoo0Ui-VF3_EkZq2Q_70G1fW20w0fb4-H86Ns",
-            "https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-6/541157755_3736336596670008_3380235302931190905_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=jTZTLfwdVYkQ7kNvwGuwk9C&_nc_oc=AdnRH-_M6EhLxO2GHenMmzhawvjn8EHLhzsfgp58J6sIWH9AR-mp1owtStJB2Jot98o4XAeJvNxtpMXuToL6ge3H&_nc_zt=23&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=ypKFf1dvAXvYEjQakdLu1w&oh=00_AfaYxEL7quhQ38TSLSDbYau3iuSnYaBMf1PmRjX_tvwFZg&oe=68BF9B2E",
+            "https://bayotech.vn/wp-content/uploads/2025/06/avatar-gai-xinh-13.jpg",
           introduce: "Vì thương mà đến",
           gender: "female",
           status: true,
@@ -556,7 +556,7 @@ const reducer =  (state = initState, action) => {
     case 'INCREMENT': return { count: state.count + 1 }
     case 'SEND_MESSAGE': 
    
-      let { user_index, message, icon, emoji, reply}  = action.payload;
+      let { user_index, message, icon, emoji, reply, ai_chat}  = action.payload;
       let { listUsers, n_rand } = state;
       
       if (listUsers[user_index].listMessage === undefined) {
@@ -574,7 +574,7 @@ const reducer =  (state = initState, action) => {
                 messages: [
                     {
                         message: 
-                        listUsers[user_index].ai_chat ? 
+                        ai_chat ? 
                         reply : replyByData(message),
                         icon: "",
                         time: getCurrentTime()
@@ -590,6 +590,7 @@ const reducer =  (state = initState, action) => {
       case 'CHANGE_STATUS_AI_CHAT':
       let listUsers_s = state.listUsers;
       listUsers_s[action.payload].ai_chat =  !listUsers_s[action.payload].ai_chat;
+       localStorage.setItem("listUsers", JSON.stringify(listUsers_s));
       return {...state,listUsers: listUsers_s, n_rand: Math.random()}
     default: return state
   }
@@ -623,7 +624,7 @@ function replyByData(question) {
                 let last_word = (question.slice(j+1 ).trim());
                 for (let i = 0; i < listDefaultQA.length; i++) {
                     console.log(listDefaultQA[i].question,(last_word))
-                    if (listDefaultQA[i].question.split(" ").includes(last_word)) {
+                    if (listDefaultQA[i].question.split(" ").includes(last_word.toLowerCase())) {
                       let o = {
                         i: i,
                       }
@@ -631,8 +632,9 @@ function replyByData(question) {
                     }
                 }
               }else{
+                console.log("letsion>>>>>>>>>>>>>>", letsion);
                 for (let i = 0; i < listDefaultQA.length; i++) {
-                  if (listDefaultQA[i].question.split(" ").includes(letsion)) {
+                  if (listDefaultQA[i].question.split(" ").includes(letsion.toLowerCase())) {
                         let o = {
                           i: i,
                         }
@@ -643,6 +645,7 @@ function replyByData(question) {
               letsion = "";
             }
         }
+        console.log("check", check);
         if (check.length > 0){
           let countMap = {};
           for (let item of check) {

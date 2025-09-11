@@ -9,6 +9,7 @@ let conversation = [
 
 export const chatWithGPT = async (message, name) => {
   try {
+    // alert(conversation.length)
       if (conversation.length === 0){
         conversation.push({role: "system", content: "Bạn tên là " + name + " giờ hãy đóng vai như " + name + " đi"})
         console.log("init conversation with name:", "Bạn tên là " + name + " giờ hãy đóng vai như " + name + " đi");
@@ -20,7 +21,7 @@ export const chatWithGPT = async (message, name) => {
       }
     // push tin nhắn mới của user vào lịch sử
     conversation.push({ role: "user", content: message });
-
+      console.log("conversation:", conversation);
     const response = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {

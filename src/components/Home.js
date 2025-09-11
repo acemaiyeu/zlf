@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { act } from 'react'
 import "../scss/Home.scss"
 import logo_vn from '../asset/img/logo_vn.png'
 import logo_en from '../asset/img/istockphoto-1042208442-612x612.jpg'
@@ -15,7 +15,8 @@ class Home extends React.Component{
         message: "",
         active_user: {
             name: "",
-            avatar: ""
+            avatar: "",
+            ai_chat: false
         },
         listMessages: [],
         listUsers: this.props.listUsers,
@@ -28,10 +29,16 @@ class Home extends React.Component{
     }
 
     sendMessage = async () => {
+        let reply = "";
+        if (this.state.active_user.ai_chat) {
+            reply = await chatWithGPT(this.state.message, this.state.active_user.name);
+        }
         this.props.sendMessage({
             user_index: this.state.user_index,
             username: this.state.active_user.name,
             message: this.state.message, 
+            reply: reply,
+            ai_chat: this.state.active_user.ai_chat
         })
         this.setState({
             message: ""
@@ -121,6 +128,10 @@ class Home extends React.Component{
                         messages: this.props.messages,
                         listStickers: this.props.listStickers,
                         listMessages: this.props.listUsers[this.state.user_index].listMessage,
+                        active_user: {
+                            ...this.state.active_user,
+                            ai_chat: this.props.listUsers[this.state.user_index].ai_chat
+                        }
                     });
                 }
             clearTimeout(this.run_typing);
@@ -649,7 +660,7 @@ class Home extends React.Component{
                                                 <div className="security-item-title">
                                                     <div className="security-item-title">
                                                     <p>Chat với AI</p>
-                                                    {/* {!listUsers[user_index]?.ai_chat ? <i className="bi bi-toggle-off"></i> : <i className="bi bi-toggle-on"></i>} */}
+                                                    {!active_user.ai_chat ? <i className="bi bi-toggle-off"></i> : <i className="bi bi-toggle-on"></i>} 
                                                     
                                                 {/*  */}
                                                     </div>
